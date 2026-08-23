@@ -1,40 +1,186 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WORLDPIX —  World</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <title>WORLDPIX — Digital World</title>
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #07111f;
-      color: white;
-      overflow: hidden;
-    }
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    header {
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      background: #0b1728;
-      border-bottom: 1px solid #20324a;
-      position: relative;
-      z-index: 10;
-    }
+<body>
 
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
+<header class="topbar">
+    <div class="logo">
+        <span>WORLD</span><b>PIX</b>
+    </div>
+
+    <div class="top-actions">
+        <button id="loginBtn">Войти</button>
+        <button class="profile-btn">👤</button>
+    </div>
+</header>
+
+
+<main>
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                🌍 100,000,000 участков
+            </div>
+
+            <h1>
+                Твой участок<br>
+                <span>в цифровом мире.</span>
+            </h1>
+
+            <p>
+                WORLDPIX — интерактивная карта мира,
+                где каждый участок может принадлежать человеку,
+                бренду или проекту.
+            </p>
+
+            <div class="hero-buttons">
+                <button id="mapBtn" class="primary-btn">
+                    Открыть карту
+                </button>
+
+                <button class="secondary-btn">
+                    Узнать больше
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="mapSection" class="map-section">
+
+        <div class="section-title">
+            <h2>WORLDPIX MAP</h2>
+            <p>Выбери свободный участок</p>
+        </div>
+
+        <div class="map-container">
+
+            <div class="map-grid" id="mapGrid">
+
+                <!-- Участки создаются через JavaScript -->
+
+            </div>
+
+            <div class="map-info">
+
+                <div>
+                    <span class="status free"></span>
+                    Свободен
+                </div>
+
+                <div>
+                    <span class="status owned"></span>
+                    Занят
+                </div>
+
+                <div>
+                    <span class="status selected"></span>
+                    Выбран
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="stats">
+
+        <div class="stat">
+            <strong>100M</strong>
+            <span>участков</span>
+        </div>
+
+        <div class="stat">
+            <strong>10×10K</strong>
+            <span>сетка карты</span>
+        </div>
+
+        <div class="stat">
+            <strong>∞</strong>
+            <span>возможностей</span>
+        </div>
+
+    </section>
+
+
+    <section class="about">
+
+        <h2>Что такое WORLDPIX?</h2>
+
+        <p>
+            Представь цифровую карту, разделённую на
+            100 000 000 уникальных участков.
+            Каждый участок может стать твоим цифровым пространством.
+        </p>
+
+        <div class="features">
+
+            <div class="feature">
+                <div>🗺️</div>
+                <h3>Карта мира</h3>
+                <p>Исследуй огромную цифровую карту.</p>
+            </div>
+
+            <div class="feature">
+                <div>🏠</div>
+                <h3>Твой участок</h3>
+                <p>Получай и владей уникальным участком.</p>
+            </div>
+
+            <div class="feature">
+                <div>💰</div>
+                <h3>Маркетплейс</h3>
+                <p>В будущем участки можно будет продавать.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="start">
+
+        <h2>Создай свою точку<br>в цифровом мире.</h2>
+
+        <button class="primary-btn" id="startBtn">
+            Начать
+        </button>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="logo">
+        <span>WORLD</span><b>PIX</b>
+    </div>
+
+    <p>© 2026 WORLDPIX</p>
+
+</footer>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>    }
 
     .logo span {
       color: #4da3ff;
