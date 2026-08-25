@@ -1,1283 +1,1161 @@
-            </div>
-
-        </div>
-
-
-        <!-- PLOT INFORMATION -->
-
-        <div
-            id="plotPanel"
-            class="plot-panel">
-
-            <h3 id="plotTitle">
-                Участок WORLDPIX
-            </h3>
-
-            <div class="plot-details">
-
-                <div class="detail">
-
-                    <span
-                        class="detail-label"
-                        id="detailCityLabel">
-                        Город
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailCity">
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="detail">
-
-                    <span
-                        class="detail-label"
-                        id="detailNumberLabel">
-                        Номер
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailNumber">
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="detail">
-
-                    <span
-                        class="detail-label"
-                        id="detailStatusLabel">
-                        Статус
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailStatus">
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="detail">
-
-                    <span
-                        class="detail-label"
-                        id="detailPriceLabel">
-                        Стоимость
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailPrice">
-                        —
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <button
-                id="claimBtn"
-                class="primary-btn">
-                Получить участок
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- STATS -->
-
-    <section class="stats-section">
-
-        <div class="stat">
-
-            <strong>100M</strong>
-
-            <span id="statPlots">
-                участков
-            </span>
-
-        </div>
-
-
-        <div class="stat">
-
-            <strong>10K × 10K</strong>
-
-            <span id="statGrid">
-                виртуальная сетка
-            </span>
-
-        </div>
-
-
-        <div class="stat">
-
-            <strong>∞</strong>
-
-            <span id="statPossibilities">
-                возможностей
-            </span>
-
-        </div>
-
-    </section>
-
-
-    <!-- ABOUT -->
-
-    <section
-        id="aboutSection"
-        class="about">
-
-        <h2 id="aboutTitle">
-            Что такое WORLDPIX?
-        </h2>
-
-        <p id="aboutText">
-            WORLDPIX — цифровая карта,
-            где пользователи могут получать
-            уникальные участки внутри городов,
-            создавать свои цифровые пространства
-            и в будущем взаимодействовать
-            с другими владельцами.
-        </p>
-
-
-        <div class="features">
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🗺️
-                </div>
-
-                <h3 id="featureMapTitle">
-                    Города мира
-                </h3>
-
-                <p id="featureMapText">
-                    Исследуй цифровые территории
-                    крупнейших городов мира.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🏠
-                </div>
-
-                <h3 id="featurePlotTitle">
-                    Твой участок
-                </h3>
-
-                <p id="featurePlotText">
-                    Получи уникальное цифровое
-                    пространство внутри города.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    💰
-                </div>
-
-                <h3 id="featureMarketTitle">
-                    Маркетплейс
-                </h3>
-
-                <p id="featureMarketText">
-                    В будущем владельцы смогут
-                    продавать свои участки другим
-                    пользователям.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- START -->
-
-    <section class="start">
-
-        <h2 id="startTitle">
-            Создай свою точку<br>
-            в цифровом мире.
-        </h2>
-
-        <button
-            class="primary-btn"
-            id="startBtn">
-            Начать
-        </button>
-
-    </section>
-
-</main>
-
-
-<footer>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORLDPIX</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #061323;
+    color: white;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 15px;
+}
+
+.app {
+    width: 100%;
+    max-width: 620px;
+    min-height: 90vh;
+}
+
+/* LOGO */
+
+.logo {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin: 20px 0 30px;
+}
+
+.logo span {
+    color: #4b9cff;
+}
+
+/* CARD */
+
+.card {
+    width: 100%;
+    background: #0b1d31;
+    border: 1px solid #234361;
+    border-radius: 30px;
+    padding: 35px 25px 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+h1 {
+    text-align: center;
+    font-size: 34px;
+    margin: 0 0 15px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #9fb0c7;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0 auto 30px;
+    max-width: 470px;
+}
+
+/* SCREENS */
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* BUTTONS */
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.choice {
+    border: 1px solid #294967;
+    background: #102940;
+    color: white;
+    border-radius: 16px;
+    padding: 16px 12px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.choice:hover {
+    background: #173b5c;
+    border-color: #4b9cff;
+    transform: translateY(-2px);
+}
+
+.choice:active {
+    transform: scale(0.98);
+}
+
+/* COUNTRY / CITY */
+
+.search {
+    width: 100%;
+    padding: 15px 17px;
+    border-radius: 14px;
+    border: 1px solid #294967;
+    background: #08192b;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+.search:focus {
+    border-color: #4b9cff;
+}
+
+.list {
+    display: grid;
+    gap: 10px;
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 3px;
+}
+
+.list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background: #294967;
+    border-radius: 10px;
+}
+
+/* BACK */
+
+.back {
+    display: block;
+    margin: 25px auto 0;
+    background: transparent;
+    border: none;
+    color: #7fb6ff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.back:hover {
+    color: white;
+}
+
+/* MAP */
+
+.map-preview {
+    margin-top: 25px;
+    border: 1px solid #294967;
+    border-radius: 20px;
+    height: 300px;
+    background:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+        #071a2c;
+    background-size: 25px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.map-message {
+    color: #9fb0c7;
+    line-height: 1.6;
+}
+
+.open-map {
+    margin-top: 20px;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 15px;
+    background: #4b9cff;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.open-map:hover {
+    background: #398cf0;
+}
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    .app {
+        min-height: 95vh;
+    }
+
+    .logo {
+        font-size: 32px;
+        margin-top: 15px;
+    }
+
+    .card {
+        border-radius: 25px;
+        padding: 28px 18px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .subtitle {
+        font-size: 17px;
+    }
+
+    .buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .choice {
+        padding: 17px 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
 
     <div class="logo">
-        <span>WORLD</span><b>PIX</b>
+        WORLD<span>PIX</span>
     </div>
 
-    <p>
-        © 2026 WORLDPIX
-    </p>
+    <div class="card">
 
-</footer>
+        <!-- LANGUAGE -->
+
+        <section id="languageScreen" class="screen active">
+
+            <h1>Choose your language</h1>
+
+            <p class="subtitle">
+                Select a language to enter WORLDPIX
+            </p>
+
+            <div class="buttons">
+
+                <button class="choice" onclick="selectLanguage('English')">
+                    🇬🇧 English
+                </button>
+
+                <button class="choice" onclick="selectLanguage('Русский')">
+                    🇷🇺 Русский
+                </button>
+
+                <button class="choice" onclick="selectLanguage('Deutsch')">
+                    🇩🇪 Deutsch
+                </button>
+
+                <button class="choice" onclick="selectLanguage('Français')">
+                    🇫🇷 Français
+                </button>
+
+                <button class="choice" onclick="selectLanguage('Español')">
+                    🇪🇸 Español
+                </button>
+
+                <button class="choice" onclick="selectLanguage('Italiano')">
+                    🇮🇹 Italiano
+                </button>
+
+                <button class="choice" onclick="selectLanguage('Português')">
+                    🇵🇹 Português
+                </button>
+
+                <button class="choice" onclick="selectLanguage('Türkçe')">
+                    🇹🇷 Türkçe
+                </button>
+
+                <button class="choice" onclick="selectLanguage('中文')">
+                    🇨🇳 中文
+                </button>
+
+                <button class="choice" onclick="selectLanguage('日本語')">
+                    🇯🇵 日本語
+                </button>
+
+                <button class="choice" onclick="selectLanguage('한국어')">
+                    🇰🇷 한국어
+                </button>
+
+                <button class="choice" onclick="selectLanguage('العربية')">
+                    🇸🇦 العربية
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- COUNTRY -->
+
+        <section id="countryScreen" class="screen">
+
+            <h1 id="countryTitle">
+                Choose a country
+            </h1>
+
+            <p class="subtitle" id="countrySubtitle">
+                Select the country where you want to explore WORLDPIX
+            </p>
+
+            <input
+                id="countrySearch"
+                class="search"
+                type="text"
+                placeholder="Search country..."
+                oninput="filterCountries()"
+            >
+
+            <div id="countryList" class="list"></div>
+
+            <button class="back" onclick="goTo('languageScreen')">
+                ← Back
+            </button>
+
+        </section>
+
+
+        <!-- CITY -->
+
+        <section id="cityScreen" class="screen">
+
+            <h1 id="cityTitle">
+                Choose a city
+            </h1>
+
+            <p class="subtitle" id="citySubtitle">
+                Select a city to enter its WORLDPIX territory
+            </p>
+
+            <input
+                id="citySearch"
+                class="search"
+                type="text"
+                placeholder="Search city..."
+                oninput="filterCities()"
+            >
+
+            <div id="cityList" class="list"></div>
+
+            <button class="back" onclick="goTo('countryScreen')">
+                ← Back
+            </button>
+
+        </section>
+
+
+        <!-- MAP -->
+
+        <section id="mapScreen" class="screen">
+
+            <h1 id="mapTitle">
+                WORLDPIX MAP
+            </h1>
+
+            <p class="subtitle" id="mapSubtitle">
+                Your digital territory is waiting for you.
+            </p>
+
+            <div class="map-preview">
+
+                <div class="map-message">
+
+                    🌍<br><br>
+
+                    <strong id="selectedLocation">
+                        WORLDPIX
+                    </strong>
+
+                    <br><br>
+
+                    Interactive map is coming here.
+
+                </div>
+
+            </div>
+
+            <button class="open-map" onclick="alert('WORLDPIX MAP будет подключена на следующем этапе!')">
+                Open WORLDPIX MAP
+            </button>
+
+            <button class="back" onclick="goTo('cityScreen')">
+                ← Back
+            </button>
+
+        </section>
+
+    </div>
+
+</div>
 
 
 <script>
 
-    /* =========================================
-       LANGUAGE SYSTEM
-    ========================================= */
+/* =========================================
+   WORLDPIX DATA
+========================================= */
 
-    const translations = {
+const countries = [
 
-        ru: {
-            languageTitle: "Выберите язык",
-            languageSubtitle: "Выберите язык, чтобы войти в WORLDPIX",
-            headerStats: "100 000 000 участков",
-            heroTitle: "Твой участок<br><span>в цифровом мире.</span>",
-            heroText: "WORLDPIX — интерактивная карта мира, где каждый участок может принадлежать человеку, бренду или проекту.",
-            mapBtn: "Выбрать город",
-            aboutBtn: "Узнать больше",
-            cityTitle: "Выбери город",
-            citySubtitle: "Участки WORLDPIX доступны для покупки только внутри городов.",
-            cityAvailable: "Участки доступны",
-            backCity: "← Выбрать другой город",
-            selectedCityText: "Выбери свободный цифровой участок.",
-            freeText: "Свободен",
-            ownedText: "Занят",
-            selectedText: "Выбран",
-            plotTitle: "Участок WORLDPIX",
-            detailCityLabel: "Город",
-            detailNumberLabel: "Номер",
-            detailStatusLabel: "Статус",
-            detailPriceLabel: "Стоимость",
-            freeStatus: "Свободен",
-            ownedStatus: "Занят",
-            price: "1 WPX",
-            claim: "Получить участок",
-            statPlots: "участков",
-            statGrid: "виртуальная сетка",
-            statPossibilities: "возможностей",
-            aboutTitle: "Что такое WORLDPIX?",
-            aboutText: "WORLDPIX — цифровая карта, где пользователи могут получать уникальные участки внутри городов, создавать свои цифровые пространства и в будущем взаимодействовать с другими владельцами.",
-            featureMapTitle: "Города мира",
-            featureMapText: "Исследуй цифровые территории крупнейших городов мира.",
-            featurePlotTitle: "Твой участок",
-            featurePlotText: "Получи уникальное цифровое пространство внутри города.",
-            featureMarketTitle: "Маркетплейс",
-            featureMarketText: "В будущем владельцы смогут продавать свои участки другим пользователям.",
-            startTitle: "Создай свою точку<br>в цифровом мире.",
-            start: "Начать"
-        },
+    {
+        name: "United States",
+        flag: "🇺🇸",
+        cities: [
+            "New York",
+            "Los Angeles",
+            "Chicago",
+            "Houston",
+            "Phoenix",
+            "Philadelphia",
+            "San Antonio",
+            "San Diego",
+            "Dallas",
+            "San Jose"
+        ]
+    },
 
-        en: {
-            languageTitle: "Choose your language",
-            languageSubtitle: "Select your language to enter WORLDPIX",
-            headerStats: "100,000,000 plots",
-            heroTitle: "Your plot<br><span>in the digital world.</span>",
-            heroText: "WORLDPIX is an interactive world map where every plot can belong to a person, brand or project.",
-            mapBtn: "Choose a city",
-            aboutBtn: "Learn more",
-            cityTitle: "Choose a city",
-            citySubtitle: "WORLDPIX plots are available for purchase only inside cities.",
-            cityAvailable: "Plots available",
-            backCity: "← Choose another city",
-            selectedCityText: "Choose a free digital plot.",
-            freeText: "Free",
-            ownedText: "Owned",
-            selectedText: "Selected",
-            plotTitle: "WORLDPIX Plot",
-            detailCityLabel: "City",
-            detailNumberLabel: "Number",
-            detailStatusLabel: "Status",
-            detailPriceLabel: "Price",
-            freeStatus: "Free",
-            ownedStatus: "Owned",
-            price: "1 WPX",
-            claim: "Get this plot",
-            statPlots: "plots",
-            statGrid: "virtual grid",
-            statPossibilities: "possibilities",
-            aboutTitle: "What is WORLDPIX?",
-            aboutText: "WORLDPIX is a digital map where users can get unique plots inside cities, create their own digital spaces and eventually interact with other owners.",
-            featureMapTitle: "World cities",
-            featureMapText: "Explore digital territories of cities around the world.",
-            featurePlotTitle: "Your plot",
-            featurePlotText: "Get your own unique digital space inside a city.",
-            featureMarketTitle: "Marketplace",
-            featureMarketText: "In the future, owners will be able to sell their plots to other users.",
-            startTitle: "Create your point<br>in the digital world.",
-            start: "Start"
-        },
+    {
+        name: "Brazil",
+        flag: "🇧🇷",
+        cities: [
+            "São Paulo",
+            "Rio de Janeiro",
+            "Brasília",
+            "Salvador",
+            "Fortaleza",
+            "Belo Horizonte",
+            "Manaus",
+            "Curitiba",
+            "Recife",
+            "Porto Alegre"
+        ]
+    },
 
-        zh: {
-            languageTitle: "选择语言",
-            languageSubtitle: "选择语言进入 WORLDPIX",
-            headerStats: "100,000,000 个地块",
-            heroTitle: "你的数字地块<br><span>属于数字世界。</span>",
-            heroText: "WORLDPIX 是一张互动世界地图，每个地块都可以属于个人、品牌或项目。",
-            mapBtn: "选择城市",
-            aboutBtn: "了解更多",
-            cityTitle: "选择城市",
-            citySubtitle: "WORLDPIX 地块目前只能在城市范围内购买。",
-            cityAvailable: "地块可用",
-            backCity: "← 选择其他城市",
-            selectedCityText: "选择一个空闲的数字地块。",
-            freeText: "空闲",
-            ownedText: "已拥有",
-            selectedText: "已选择",
-            plotTitle: "WORLDPIX 地块",
-            detailCityLabel: "城市",
-            detailNumberLabel: "编号",
-            detailStatusLabel: "状态",
-            detailPriceLabel: "价格",
-            freeStatus: "空闲",
-            ownedStatus: "已拥有",
-            price: "1 WPX",
-            claim: "获取地块",
-            statPlots: "地块",
-            statGrid: "虚拟网格",
-            statPossibilities: "无限可能",
-            aboutTitle: "什么是 WORLDPIX？",
-            aboutText: "WORLDPIX 是一张数字地图，用户可以在城市中获得独特的数字地块，创建自己的数字空间，并在未来与其他所有者互动。",
-            featureMapTitle: "世界城市",
-            featureMapText: "探索世界各地城市的数字区域。",
-            featurePlotTitle: "你的地块",
-            featurePlotText: "获得属于你的城市数字空间。",
-            featureMarketTitle: "市场",
-            featureMarketText: "未来地块所有者可以将自己的地块出售给其他用户。",
-            startTitle: "在数字世界<br>创建你的坐标。",
-            start: "开始"
-        },
+    {
+        name: "Mexico",
+        flag: "🇲🇽",
+        cities: [
+            "Mexico City",
+            "Guadalajara",
+            "Monterrey",
+            "Puebla",
+            "Tijuana",
+            "León",
+            "Juárez",
+            "Mérida"
+        ]
+    },
 
-        hi: {
-            languageTitle: "भाषा चुनें",
-            languageSubtitle: "WORLDPIX में प्रवेश करने के लिए भाषा चुनें",
-            headerStats: "100,000,000 प्लॉट",
-            heroTitle: "आपका प्लॉट<br><span>डिजिटल दुनिया में।</span>",
-            heroText: "WORLDPIX एक इंटरैक्टिव विश्व मानचित्र है जहाँ हर प्लॉट किसी व्यक्ति, ब्रांड या प्रोजेक्ट का हो सकता है।",
-            mapBtn: "शहर चुनें",
-            aboutBtn: "और जानें",
-            cityTitle: "शहर चुनें",
-            citySubtitle: "WORLDPIX प्लॉट केवल शहरों के अंदर खरीदे जा सकते हैं।",
-            backCity: "← दूसरा शहर चुनें",
-            selectedCityText: "एक खाली डिजिटल प्लॉट चुनें।",
-            freeText: "खाली",
-            ownedText: "स्वामित्व में",
-            selectedText: "चयनित",
-            plotTitle: "WORLDPIX प्लॉट",
-            detailCityLabel: "शहर",
-            detailNumberLabel: "नंबर",
-            detailStatusLabel: "स्थिति",
-            detailPriceLabel: "कीमत",
-            freeStatus: "खाली",
-            ownedStatus: "स्वामित्व में",
-            price: "1 WPX",
-            claim: "प्लॉट प्राप्त करें",
-            statPlots: "प्लॉट",
-            statGrid: "वर्चुअल ग्रिड",
-            statPossibilities: "संभावनाएँ",
-            aboutTitle: "WORLDPIX क्या है?",
-            aboutText: "WORLDPIX एक डिजिटल मानचित्र है जहाँ उपयोगकर्ता शहरों के अंदर अद्वितीय प्लॉट प्राप्त कर सकते हैं और अपने डिजिटल स्पेस बना सकते हैं।",
-            featureMapTitle: "दुनिया के शहर",
-            featureMapText: "दुनिया भर के शहरों के डिजिटल क्षेत्रों को देखें।",
-            featurePlotTitle: "आपका प्लॉट",
-            featurePlotText: "शहर के अंदर अपना अनोखा डिजिटल स्पेस प्राप्त करें।",
-            featureMarketTitle: "मार्केटप्लेस",
-            featureMarketText: "भविष्य में मालिक अपने प्लॉट दूसरे उपयोगकर्ताओं को बेच सकेंगे।",
-            startTitle: "डिजिटल दुनिया में<br>अपना स्थान बनाएं।",
-            start: "शुरू करें"
-        },
+    {
+        name: "Argentina",
+        flag: "🇦🇷",
+        cities: [
+            "Buenos Aires",
+            "Córdoba",
+            "Rosario",
+            "Mendoza",
+            "La Plata"
+        ]
+    },
 
-        ar: {
-            languageTitle: "اختر لغتك",
-            languageSubtitle: "اختر لغتك للدخول إلى WORLDPIX",
-            headerStats: "100,000,000 قطعة",
-            heroTitle: "قطعتك<br><span>في العالم الرقمي.</span>",
-            heroText: "WORLDPIX هي خريطة تفاعلية للعالم، حيث يمكن أن تنتمي كل قطعة إلى شخص أو علامة تجارية أو مشروع.",
-            mapBtn: "اختر مدينة",
-            aboutBtn: "اعرف المزيد",
-            cityTitle: "اختر مدينة",
-            citySubtitle: "قطع WORLDPIX متاحة للشراء داخل المدن فقط.",
-            backCity: "→ اختر مدينة أخرى",
-            selectedCityText: "اختر قطعة رقمية متاحة.",
-            freeText: "متاحة",
-            ownedText: "مملوكة",
-            selectedText: "محددة",
-            plotTitle: "قطعة WORLDPIX",
-            detailCityLabel: "المدينة",
-            detailNumberLabel: "الرقم",
-            detailStatusLabel: "الحالة",
-            detailPriceLabel: "السعر",
-            freeStatus: "متاحة",
-            ownedStatus: "مملوكة",
-            price: "1 WPX",
-            claim: "احصل على القطعة",
-            statPlots: "قطعة",
-            statGrid: "شبكة افتراضية",
-            statPossibilities: "إمكانيات",
-            aboutTitle: "ما هو WORLDPIX؟",
-            aboutText: "WORLDPIX هي خريطة رقمية تتيح للمستخدمين الحصول على قطع فريدة داخل المدن وإنشاء مساحات رقمية خاصة بهم.",
-            featureMapTitle: "مدن العالم",
-            featureMapText: "استكشف المناطق الرقمية للمدن حول العالم.",
-            featurePlotTitle: "قطعتك",
-            featurePlotText: "احصل على مساحتك الرقمية الخاصة داخل المدينة.",
-            featureMarketTitle: "السوق",
-            featureMarketText: "في المستقبل سيتمكن الملاك من بيع قطعهم لمستخدمين آخرين.",
-            startTitle: "أنشئ نقطتك<br>في العالم الرقمي.",
-            start: "ابدأ"
-        },
+    {
+        name: "Germany",
+        flag: "🇩🇪",
+        cities: [
+            "Berlin",
+            "Hamburg",
+            "Munich",
+            "Cologne",
+            "Frankfurt",
+            "Stuttgart",
+            "Düsseldorf",
+            "Leipzig"
+        ]
+    },
 
-        de: {
-            languageTitle: "Sprache auswählen",
-            languageSubtitle: "Wähle deine Sprache für WORLDPIX",
-            headerStats: "100.000.000 Grundstücke",
-            heroTitle: "Dein Grundstück<br><span>in der digitalen Welt.</span>",
-            heroText: "WORLDPIX ist eine interaktive Weltkarte, auf der jedes Grundstück einer Person, Marke oder einem Projekt gehören kann.",
-            mapBtn: "Stadt auswählen",
-            aboutBtn: "Mehr erfahren",
-            cityTitle: "Stadt auswählen",
-            citySubtitle: "WORLDPIX-Grundstücke können nur innerhalb von Städten erworben werden.",
-            backCity: "← Andere Stadt",
-            selectedCityText: "Wähle ein freies digitales Grundstück.",
-            freeText: "Frei",
-            ownedText: "Besetzt",
-            selectedText: "Ausgewählt",
-            plotTitle: "WORLDPIX Grundstück",
-            detailCityLabel: "Stadt",
-            detailNumberLabel: "Nummer",
-            detailStatusLabel: "Status",
-            detailPriceLabel: "Preis",
-            freeStatus: "Frei",
-            ownedStatus: "Besetzt",
-            price: "1 WPX",
-            claim: "Grundstück erhalten",
-            statPlots: "Grundstücke",
-            statGrid: "virtuelles Raster",
-            statPossibilities: "Möglichkeiten",
-            aboutTitle: "Was ist WORLDPIX?",
-            aboutText: "WORLDPIX ist eine digitale Karte, auf der Nutzer einzigartige Grundstücke innerhalb von Städten erhalten können.",
-            featureMapTitle: "Städte der Welt",
-            featureMapText: "Entdecke digitale Gebiete von Städten weltweit.",
-            featurePlotTitle: "Dein Grundstück",
-            featurePlotText: "Erhalte deinen eigenen digitalen Bereich.",
-            featureMarketTitle: "Marktplatz",
-            featureMarketText: "In Zukunft können Eigentümer ihre Grundstücke verkaufen.",
-            startTitle: "Erstelle deinen Punkt<br>in der digitalen Welt.",
-            start: "Starten"
-        },
+    {
+        name: "France",
+        flag: "🇫🇷",
+        cities: [
+            "Paris",
+            "Marseille",
+            "Lyon",
+            "Toulouse",
+            "Nice",
+            "Nantes",
+            "Montpellier"
+        ]
+    },
 
-        fr: {
-            languageTitle: "Choisissez votre langue",
-            languageSubtitle: "Choisissez votre langue pour entrer dans WORLDPIX",
-            headerStats: "100 000 000 parcelles",
-            heroTitle: "Votre parcelle<br><span>dans le monde numérique.</span>",
-            heroText: "WORLDPIX est une carte interactive du monde où chaque parcelle peut appartenir à une personne, une marque ou un projet.",
-            mapBtn: "Choisir une ville",
-            aboutBtn: "En savoir plus",
-            cityTitle: "Choisissez une ville",
-            citySubtitle: "Les parcelles WORLDPIX sont disponibles à l'achat uniquement dans les villes.",
-            backCity: "← Choisir une autre ville",
-            selectedCityText: "Choisissez une parcelle numérique libre.",
-            freeText: "Libre",
-            ownedText: "Occupée",
-            selectedText: "Sélectionnée",
-            plotTitle: "Parcelle WORLDPIX",
-            detailCityLabel: "Ville",
-            detailNumberLabel: "Numéro",
-            detailStatusLabel: "Statut",
-            detailPriceLabel: "Prix",
-            freeStatus: "Libre",
-            ownedStatus: "Occupée",
-            price: "1 WPX",
-            claim: "Obtenir la parcelle",
-            statPlots: "parcelles",
-            statGrid: "grille virtuelle",
-            statPossibilities: "possibilités",
-            aboutTitle: "Qu'est-ce que WORLDPIX ?",
-            aboutText: "WORLDPIX est une carte numérique où les utilisateurs peuvent obtenir des parcelles uniques dans les villes.",
-            featureMapTitle: "Villes du monde",
-            featureMapText: "Explorez les territoires numériques des villes du monde.",
-            featurePlotTitle: "Votre parcelle",
-            featurePlotText: "Obtenez votre espace numérique unique.",
-            featureMarketTitle: "Marketplace",
-            featureMarketText: "À l'avenir, les propriétaires pourront vendre leurs parcelles.",
-            startTitle: "Créez votre point<br>dans le monde numérique.",
-            start: "Commencer"
-        },
+    {
+        name: "United Kingdom",
+        flag: "🇬🇧",
+        cities: [
+            "London",
+            "Birmingham",
+            "Manchester",
+            "Glasgow",
+            "Liverpool",
+            "Leeds",
+            "Sheffield"
+        ]
+    },
 
-        es: {
-            languageTitle: "Elige tu idioma",
-            languageSubtitle: "Selecciona tu idioma para entrar en WORLDPIX",
-            headerStats: "100.000.000 parcelas",
-            heroTitle: "Tu parcela<br><span>en el mundo digital.</span>",
-            heroText: "WORLDPIX es un mapa interactivo del mundo donde cada parcela puede pertenecer a una persona, marca o proyecto.",
-            mapBtn: "Elegir ciudad",
-            aboutBtn: "Saber más",
-            cityTitle: "Elige una ciudad",
-            citySubtitle: "Las parcelas WORLDPIX están disponibles para compra solo dentro de las ciudades.",
-            backCity: "← Elegir otra ciudad",
-            selectedCityText: "Elige una parcela digital libre.",
-            freeText: "Libre",
-            ownedText: "Ocupada",
-            selectedText: "Seleccionada",
-            plotTitle: "Parcela WORLDPIX",
-            detailCityLabel: "Ciudad",
-            detailNumberLabel: "Número",
-            detailStatusLabel: "Estado",
-            detailPriceLabel: "Precio",
-            freeStatus: "Libre",
-            ownedStatus: "Ocupada",
-            price: "1 WPX",
-            claim: "Obtener parcela",
-            statPlots: "parcelas",
-            statGrid: "rejilla virtual",
-            statPossibilities: "posibilidades",
-            aboutTitle: "¿Qué es WORLDPIX?",
-            aboutText: "WORLDPIX es un mapa digital donde los usuarios pueden obtener parcelas únicas dentro de las ciudades.",
-            featureMapTitle: "Ciudades del mundo",
-            featureMapText: "Explora territorios digitales de ciudades de todo el mundo.",
-            featurePlotTitle: "Tu parcela",
-            featurePlotText: "Obtén tu propio espacio digital.",
-            featureMarketTitle: "Marketplace",
-            featureMarketText: "En el futuro los propietarios podrán vender sus parcelas.",
-            startTitle: "Crea tu punto<br>en el mundo digital.",
-            start: "Comenzar"
-        },
+    {
+        name: "Spain",
+        flag: "🇪🇸",
+        cities: [
+            "Madrid",
+            "Barcelona",
+            "Valencia",
+            "Seville",
+            "Zaragoza",
+            "Málaga"
+        ]
+    },
 
-        it: {
-            languageTitle: "Scegli la lingua",
-            languageSubtitle: "Scegli la lingua per entrare in WORLDPIX",
-            headerStats: "100.000.000 terreni",
-            heroTitle: "Il tuo terreno<br><span>nel mondo digitale.</span>",
-            heroText: "WORLDPIX è una mappa interattiva del mondo dove ogni terreno può appartenere a una persona, un marchio o un progetto.",
-            mapBtn: "Scegli una città",
-            aboutBtn: "Scopri di più",
-            cityTitle: "Scegli una città",
-            citySubtitle: "I terreni WORLDPIX sono acquistabili solo all'interno delle città.",
-            backCity: "← Scegli un'altra città",
-            selectedCityText: "Scegli un terreno digitale libero.",
-            freeText: "Libero",
-            ownedText: "Occupato",
-            selectedText: "Selezionato",
-            plotTitle: "Terreno WORLDPIX",
-            detailCityLabel: "Città",
-            detailNumberLabel: "Numero",
-            detailStatusLabel: "Stato",
-            detailPriceLabel: "Prezzo",
-            freeStatus: "Libero",
-            ownedStatus: "Occupato",
-            price: "1 WPX",
-            claim: "Ottieni terreno",
-            statPlots: "terreni",
-            statGrid: "griglia virtuale",
-            statPossibilities: "possibilità",
-            aboutTitle: "Cos'è WORLDPIX?",
-            aboutText: "WORLDPIX è una mappa digitale dove gli utenti possono ottenere terreni unici all'interno delle città.",
-            featureMapTitle: "Città del mondo",
-            featureMapText: "Esplora i territori digitali delle città del mondo.",
-            featurePlotTitle: "Il tuo terreno",
-            featurePlotText: "Ottieni il tuo spazio digitale unico.",
-            featureMarketTitle: "Marketplace",
-            featureMarketText: "In futuro i proprietari potranno vendere i loro terreni.",
-            startTitle: "Crea il tuo punto<br>nel mondo digitale.",
-            start: "Inizia"
-        },
+    {
+        name: "Italy",
+        flag: "🇮🇹",
+        cities: [
+            "Rome",
+            "Milan",
+            "Naples",
+            "Turin",
+            "Palermo",
+            "Genoa",
+            "Bologna"
+        ]
+    },
 
-        pl: {
-            languageTitle: "Wybierz język",
-            languageSubtitle: "Wybierz język, aby wejść do WORLDPIX",
-            headerStats: "100 000 000 działek",
-            heroTitle: "Twoja działka<br><span>w cyfrowym świecie.</span>",
-            heroText: "WORLDPIX to interaktywna mapa świata, na której każda działka może należeć do osoby, marki lub projektu.",
-            mapBtn: "Wybierz miasto",
-            aboutBtn: "Dowiedz się więcej",
-            cityTitle: "Wybierz miasto",
-            citySubtitle: "Działki WORLDPIX są dostępne do zakupu tylko w miastach.",
-            backCity: "← Wybierz inne miasto",
-            selectedCityText: "Wybierz wolną działkę cyfrową.",
-            freeText: "Wolna",
-            ownedText: "Zajęta",
-            selectedText: "Wybrana",
-            plotTitle: "Działka WORLDPIX",
-            detailCityLabel: "Miasto",
-            detailNumberLabel: "Numer",
-            detailStatusLabel: "Status",
-            detailPriceLabel: "Cena",
-            freeStatus: "Wolna",
-            ownedStatus: "Zajęta",
-            price: "1 WPX",
-            claim: "Odbierz działkę",
-            statPlots: "działek",
-            statGrid: "wirtualna siatka",
-            statPossibilities: "możliwości",
-            aboutTitle: "Czym jest WORLDPIX?",
-            aboutText: "WORLDPIX to cyfrowa mapa, na której użytkownicy mogą zdobywać unikalne działki w miastach.",
-            featureMapTitle: "Miasta świata",
-            featureMapText: "Odkrywaj cyfrowe terytoria miast na całym świecie.",
-            featurePlotTitle: "Twoja działka",
-            featurePlotText: "Zdobądź własną cyfrową przestrzeń.",
-            featureMarketTitle: "Marketplace",
-            featureMarketText: "W przyszłości właściciele będą mogli sprzedawać swoje działki.",
-            startTitle: "Stwórz swój punkt<br>w cyfrowym świecie.",
-            start: "Zacznij"
-        }
-    };
+    {
+        name: "Turkey",
+        flag: "🇹🇷",
+        cities: [
+            "Istanbul",
+            "Ankara",
+            "Izmir",
+            "Bursa",
+            "Antalya",
+            "Adana",
+            "Gaziantep"
+        ]
+    },
 
+    {
+        name: "China",
+        flag: "🇨🇳",
+        cities: [
+            "Shanghai",
+            "Beijing",
+            "Chongqing",
+            "Guangzhou",
+            "Shenzhen",
+            "Chengdu",
+            "Tianjin",
+            "Wuhan",
+            "Xi'an",
+            "Nanjing"
+        ]
+    },
 
-    let currentLanguage =
-        localStorage.getItem("worldpixLanguage") || null;
+    {
+        name: "Japan",
+        flag: "🇯🇵",
+        cities: [
+            "Tokyo",
+            "Yokohama",
+            "Osaka",
+            "Nagoya",
+            "Sapporo",
+            "Fukuoka",
+            "Kobe",
+            "Kyoto"
+        ]
+    },
 
+    {
+        name: "South Korea",
+        flag: "🇰🇷",
+        cities: [
+            "Seoul",
+            "Busan",
+            "Incheon",
+            "Daegu",
+            "Daejeon",
+            "Gwangju"
+        ]
+    },
 
-    function applyLanguage(lang) {
+    {
+        name: "India",
+        flag: "🇮🇳",
+        cities: [
+            "Mumbai",
+            "Delhi",
+            "Bengaluru",
+            "Hyderabad",
+            "Ahmedabad",
+            "Chennai",
+            "Kolkata",
+            "Surat",
+            "Pune",
+            "Jaipur"
+        ]
+    },
 
-        currentLanguage = lang;
+    {
+        name: "Indonesia",
+        flag: "🇮🇩",
+        cities: [
+            "Jakarta",
+            "Surabaya",
+            "Bandung",
+            "Medan",
+            "Semarang",
+            "Makassar"
+        ]
+    },
 
-        localStorage.setItem(
-            "worldpixLanguage",
-            lang
-        );
+    {
+        name: "Pakistan",
+        flag: "🇵🇰",
+        cities: [
+            "Karachi",
+            "Lahore",
+            "Faisalabad",
+            "Rawalpindi",
+            "Gujranwala",
+            "Peshawar"
+        ]
+    },
 
-        const t =
-            translations[lang];
+    {
+        name: "Bangladesh",
+        flag: "🇧🇩",
+        cities: [
+            "Dhaka",
+            "Chittagong",
+            "Khulna",
+            "Rajshahi"
+        ]
+    },
 
-        document.documentElement.lang =
-            lang;
+    {
+        name: "Egypt",
+        flag: "🇪🇬",
+        cities: [
+            "Cairo",
+            "Alexandria",
+            "Giza",
+            "Port Said",
+            "Suez"
+        ]
+    },
 
-        if (lang === "ar") {
-            document.body.classList.add("rtl");
-            document.documentElement.dir = "rtl";
-        } else {
-            document.body.classList.remove("rtl");
-            document.documentElement.dir = "ltr";
-        }
+    {
+        name: "Nigeria",
+        flag: "🇳🇬",
+        cities: [
+            "Lagos",
+            "Kano",
+            "Ibadan",
+            "Abuja",
+            "Port Harcourt",
+            "Benin City"
+        ]
+    },
 
+    {
+        name: "South Africa",
+        flag: "🇿🇦",
+        cities: [
+            "Johannesburg",
+            "Cape Town",
+            "Durban",
+            "Pretoria",
+            "Gqeberha"
+        ]
+    },
 
-        document.getElementById("languageTitle")
-            .textContent = t.languageTitle;
+    {
+        name: "Saudi Arabia",
+        flag: "🇸🇦",
+        cities: [
+            "Riyadh",
+            "Jeddah",
+            "Mecca",
+            "Medina",
+            "Dammam"
+        ]
+    },
 
-        document.getElementById("languageSubtitle")
-            .textContent = t.languageSubtitle;
+    {
+        name: "United Arab Emirates",
+        flag: "🇦🇪",
+        cities: [
+            "Dubai",
+            "Abu Dhabi",
+            "Sharjah",
+            "Al Ain"
+        ]
+    },
 
-        document.getElementById("headerStats")
-            .textContent = t.headerStats;
+    {
+        name: "Canada",
+        flag: "🇨🇦",
+        cities: [
+            "Toronto",
+            "Montreal",
+            "Vancouver",
+            "Calgary",
+            "Edmonton",
+            "Ottawa"
+        ]
+    },
 
-        document.getElementById("heroTitle")
-            .innerHTML = t.heroTitle;
+    {
+        name: "Australia",
+        flag: "🇦🇺",
+        cities: [
+            "Sydney",
+            "Melbourne",
+            "Brisbane",
+            "Perth",
+            "Adelaide",
+            "Gold Coast"
+        ]
+    },
 
-        document.getElementById("heroText")
-            .textContent = t.heroText;
+    {
+        name: "Russia",
+        flag: "🇷🇺",
+        cities: [
+            "Moscow",
+            "Saint Petersburg",
+            "Novosibirsk",
+            "Yekaterinburg",
+            "Kazan",
+            "Nizhny Novgorod",
+            "Krasnoyarsk",
+            "Chelyabinsk",
+            "Samara",
+            "Ufa"
+        ]
+    },
 
-        document.getElementById("mapBtn")
-            .textContent = t.mapBtn;
+    {
+        name: "Poland",
+        flag: "🇵🇱",
+        cities: [
+            "Warsaw",
+            "Kraków",
+            "Wrocław",
+            "Łódź",
+            "Poznań",
+            "Gdańsk"
+        ]
+    },
 
-        document.getElementById("aboutBtn")
-            .textContent = t.aboutBtn;
+    {
+        name: "Netherlands",
+        flag: "🇳🇱",
+        cities: [
+            "Amsterdam",
+            "Rotterdam",
+            "The Hague",
+            "Utrecht",
+            "Eindhoven"
+        ]
+    },
 
-        document.getElementById("cityTitle")
-            .textContent = t.cityTitle;
+    {
+        name: "Sweden",
+        flag: "🇸🇪",
+        cities: [
+            "Stockholm",
+            "Gothenburg",
+            "Malmö",
+            "Uppsala"
+        ]
+    },
 
-        document.getElementById("citySubtitle")
-            .textContent = t.citySubtitle;
+    {
+        name: "Norway",
+        flag: "🇳🇴",
+        cities: [
+            "Oslo",
+            "Bergen",
+            "Trondheim",
+            "Stavanger"
+        ]
+    },
 
-        document.querySelectorAll(".city-status")
-            .forEach(item => {
-                item.textContent =
-                    t.cityAvailable;
-            });
+    {
+        name: "Greece",
+        flag: "🇬🇷",
+        cities: [
+            "Athens",
+            "Thessaloniki",
+            "Patras"
+        ]
+    },
 
-        document.getElementById("backCity")
-            .textContent = t.backCity;
+    {
+        name: "Portugal",
+        flag: "🇵🇹",
+        cities: [
+            "Lisbon",
+            "Porto",
+            "Amadora",
+            "Braga"
+        ]
+    },
 
-        document.getElementById("selectedCityText")
-            .textContent = t.selectedCityText;
+    {
+        name: "Israel",
+        flag: "🇮🇱",
+        cities: [
+            "Jerusalem",
+            "Tel Aviv",
+            "Haifa",
+            "Rishon LeZion"
+        ]
+    },
 
-        document.getElementById("freeText")
-            .textContent = t.freeText;
+    {
+        name: "Iran",
+        flag: "🇮🇷",
+        cities: [
+            "Tehran",
+            "Mashhad",
+            "Isfahan",
+            "Shiraz",
+            "Tabriz"
+        ]
+    },
 
-        document.getElementById("ownedText")
-            .textContent = t.ownedText;
+    {
+        name: "Iraq",
+        flag: "🇮🇶",
+        cities: [
+            "Baghdad",
+            "Basra",
+            "Mosul",
+            "Erbil"
+        ]
+    },
 
-        document.getElementById("selectedText")
-            .textContent = t.selectedText;
+    {
+        name: "Vietnam",
+        flag: "🇻🇳",
+        cities: [
+            "Ho Chi Minh City",
+            "Hanoi",
+            "Da Nang",
+            "Hai Phong"
+        ]
+    },
 
-        document.getElementById("plotTitle")
-            .textContent = t.plotTitle;
+    {
+        name: "Thailand",
+        flag: "🇹🇭",
+        cities: [
+            "Bangkok",
+            "Chiang Mai",
+            "Pattaya",
+            "Phuket"
+        ]
+    },
 
-        document.getElementById("detailCityLabel")
-            .textContent = t.detailCityLabel;
+    {
+        name: "Philippines",
+        flag: "🇵🇭",
+        cities: [
+            "Manila",
+            "Quezon City",
+            "Davao City",
+            "Cebu City"
+        ]
+    },
 
-        document.getElementById("detailNumberLabel")
-            .textContent = t.detailNumberLabel;
-
-        document.getElementById("detailStatusLabel")
-            .textContent = t.detailStatusLabel;
-
-        document.getElementById("detailPriceLabel")
-            .textContent = t.detailPriceLabel;
-
-        document.getElementById("claimBtn")
-            .textContent = t.claim;
-
-        document.getElementById("statPlots")
-            .textContent = t.statPlots;
-
-        document.getElementById("statGrid")
-            .textContent = t.statGrid;
-
-        document.getElementById("statPossibilities")
-            .textContent = t.statPossibilities;
-
-        document.getElementById("aboutTitle")
-            .textContent = t.aboutTitle;
-
-        document.getElementById("aboutText")
-            .textContent = t.aboutText;
-
-        document.getElementById("featureMapTitle")
-            .textContent = t.featureMapTitle;
-
-        document.getElementById("featureMapText")
-            .textContent = t.featureMapText;
-
-        document.getElementById("featurePlotTitle")
-            .textContent = t.featurePlotTitle;
-
-        document.getElementById("featurePlotText")
-            .textContent = t.featurePlotText;
-
-        document.getElementById("featureMarketTitle")
-            .textContent = t.featureMarketTitle;
-
-        document.getElementById("featureMarketText")
-            .textContent = t.featureMarketText;
-
-        document.getElementById("startTitle")
-            .innerHTML = t.startTitle;
-
-        document.getElementById("startBtn")
-            .textContent = t.start;
-
-        document.getElementById("languageChange")
-            .textContent =
-            lang.toUpperCase();
+    {
+        name: "Malaysia",
+        flag: "🇲🇾",
+        cities: [
+            "Kuala Lumpur",
+            "George Town",
+            "Johor Bahru",
+            "Ipoh"
+        ]
     }
 
+];
 
-    document
-        .querySelectorAll(".language-btn")
-        .forEach(button => {
 
-            button.addEventListener(
-                "click",
-                function () {
+/* =========================================
+   WORLDPIX STATE
+========================================= */
 
-                    applyLanguage(
-                        button.dataset.lang
-                    );
+let selectedLanguage = "English";
+let selectedCountry = null;
+let selectedCity = null;
 
-                    document
-                        .getElementById("languageScreen")
-                        .classList.add("hidden");
 
-                }
-            );
+/* =========================================
+   LANGUAGE
+========================================= */
 
+function selectLanguage(language) {
+
+    selectedLanguage = language;
+
+    updateTexts();
+
+    renderCountries();
+
+    goTo("countryScreen");
+}
+
+
+/* =========================================
+   COUNTRY
+========================================= */
+
+function renderCountries(filter = "") {
+
+    const list = document.getElementById("countryList");
+
+    list.innerHTML = "";
+
+    const filtered = countries.filter(country =>
+        country.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    filtered.forEach(country => {
+
+        const button = document.createElement("button");
+
+        button.className = "choice";
+
+        button.innerHTML =
+            country.flag + " " + country.name;
+
+        button.onclick = () => selectCountry(country);
+
+        list.appendChild(button);
+    });
+}
+
+
+function selectCountry(country) {
+
+    selectedCountry = country;
+
+    document.getElementById("cityTitle").textContent =
+        country.flag + " " + country.name;
+
+    renderCities();
+
+    goTo("cityScreen");
+}
+
+
+function filterCountries() {
+
+    const value =
+        document.getElementById("countrySearch").value;
+
+    renderCountries(value);
+}
+
+
+/* =========================================
+   CITY
+========================================= */
+
+function renderCities(filter = "") {
+
+    const list = document.getElementById("cityList");
+
+    list.innerHTML = "";
+
+    if (!selectedCountry) return;
+
+    const filtered =
+        selectedCountry.cities.filter(city =>
+            city.toLowerCase().includes(filter.toLowerCase())
+        );
+
+    filtered.forEach(city => {
+
+        const button = document.createElement("button");
+
+        button.className = "choice";
+
+        button.textContent = "📍 " + city;
+
+        button.onclick = () => selectCity(city);
+
+        list.appendChild(button);
+    });
+}
+
+
+function selectCity(city) {
+
+    selectedCity = city;
+
+    document.getElementById("selectedLocation").textContent =
+        selectedCountry.name + " — " + city;
+
+    goTo("mapScreen");
+}
+
+
+function filterCities() {
+
+    const value =
+        document.getElementById("citySearch").value;
+
+    renderCities(value);
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function goTo(screenId) {
+
+    document.querySelectorAll(".screen").forEach(screen => {
+
+        screen.classList.remove("active");
+
+    });
+
+    document.getElementById(screenId).classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================
+   TRANSLATIONS
+========================================= */
+
+function updateTexts() {
+
+    const language = selectedLanguage;
+
+    if (language === "Русский") {
+
+        document.querySelector("#countryTitle").textContent =
+            "Выберите страну";
+
+        document.querySelector("#countrySubtitle").textContent =
+            "Выберите страну, чтобы продолжить в WORLDPIX";
+
+        document.querySelector("#countrySearch").placeholder =
+            "Поиск страны...";
+
+        document.querySelector("#citySubtitle").textContent =
+            "Выберите город, чтобы войти в его территорию WORLDPIX";
+
+        document.querySelector("#citySearch").placeholder =
+            "Поиск города...";
+
+        document.querySelector("#mapTitle").textContent =
+            "КАРТА WORLDPIX";
+
+        document.querySelector("#mapSubtitle").textContent =
+            "Ваш цифровой участок ждёт вас.";
+
+        document.querySelector(".open-map").textContent =
+            "Открыть WORLDPIX MAP";
+
+        document.querySelectorAll(".back").forEach(button => {
+            button.textContent = "← Назад";
         });
 
+    } else {
 
-    document
-        .getElementById("languageChange")
-        .addEventListener(
-            "click",
-            function () {
+        document.querySelector("#countryTitle").textContent =
+            "Choose a country";
 
-                document
-                    .getElementById("languageScreen")
-                    .classList.remove("hidden");
+        document.querySelector("#countrySubtitle").textContent =
+            "Select a country to continue in WORLDPIX";
 
-            }
-        );
+        document.querySelector("#countrySearch").placeholder =
+            "Search country...";
 
+        document.querySelector("#citySubtitle").textContent =
+            "Select a city to enter its WORLDPIX territory";
 
-    /*
-       Если язык уже выбран,
-       экран выбора скрываем.
-    */
+        document.querySelector("#citySearch").placeholder =
+            "Search city...";
 
-    if (currentLanguage) {
+        document.querySelector("#mapTitle").textContent =
+            "WORLDPIX MAP";
 
-        applyLanguage(
-            currentLanguage
-        );
+        document.querySelector("#mapSubtitle").textContent =
+            "Your digital territory is waiting for you.";
 
-        document
-            .getElementById("languageScreen")
-            .classList.add("hidden");
+        document.querySelector(".open-map").textContent =
+            "Open WORLDPIX MAP";
 
-    }
-
-
-    /* =========================================
-       CITY SYSTEM
-    ========================================= */
-
-    const mapGrid =
-        document.getElementById("mapGrid");
-
-    const citySection =
-        document.getElementById("citySection");
-
-    const mapSection =
-        document.getElementById("mapSection");
-
-    const selectedCityName =
-        document.getElementById("selectedCityName");
-
-    const plotPanel =
-        document.getElementById("plotPanel");
-
-    let currentCity = null;
-
-    let selectedPlot = null;
-
-
-    /*
-       Пока это демонстрационная карта.
-
-       В будущем эти данные будут
-       приходить из Supabase.
-    */
-
-    const ownedPlots = {
-
-        "Киев": [15, 84, 240],
-
-        "Москва": [44, 180, 501],
-
-        "Лондон": [22, 121, 700],
-
-        "Нью-Йорк": [5, 350, 800],
-
-        "Париж": [32, 100, 450],
-
-        "Берлин": [60, 220, 900],
-
-        "Дубай": [17, 300, 670],
-
-        "Дели": [40, 120, 500],
-
-        "Пекин": [33, 400, 777],
-
-        "Токио": [50, 222, 888]
-
-    };
-
-
-    function createCityMap(city) {
-
-        currentCity = city;
-
-        selectedPlot = null;
-
-        mapGrid.innerHTML = "";
-
-        plotPanel.classList.remove(
-            "active"
-        );
-
-        selectedCityName.textContent =
-            city;
-
-
-        const occupied =
-            ownedPlots[city] || [];
-
-
-        const totalVisiblePlots = 1000;
-
-
-        for (
-            let i = 0;
-            i < totalVisiblePlots;
-            i++
-        ) {
-
-            const plot =
-                document.createElement("div");
-
-            plot.className =
-                "plot";
-
-
-            const plotNumber =
-                i + 1;
-
-
-            if (
-                occupied.includes(
-                    plotNumber
-                )
-            ) {
-
-                plot.classList.add(
-                    "owned"
-                );
-
-            }
-
-
-            plot.title =
-                "WORLDPIX #" +
-                plotNumber;
-
-
-            plot.addEventListener(
-                "click",
-                function () {
-
-                    selectPlot(
-                        plot,
-                        plotNumber,
-                        occupied.includes(
-                            plotNumber
-                        )
-                    );
-
-                }
-            );
-
-
-            mapGrid.appendChild(
-                plot
-            );
-
-        }
-
-
-        citySection.style.display =
-            "none";
-
-        mapSection.classList.add(
-            "active"
-        );
-
-
-        mapSection.scrollIntoView({
-            behavior: "smooth"
+        document.querySelectorAll(".back").forEach(button => {
+            button.textContent = "← Back";
         });
-
     }
+}
 
 
-    function selectPlot(
-        plot,
-        number,
-        isOwned
-    ) {
+/* =========================================
+   START
+========================================= */
 
-        document
-            .querySelectorAll(
-                ".plot.selected"
-            )
-            .forEach(
-                item =>
-                    item.classList.remove(
-                        "selected"
-                    )
-            );
-
-
-        if (isOwned) {
-
-            plotPanel.classList.add(
-                "active"
-            );
-
-
-            const t =
-                translations[
-                    currentLanguage
-                ];
-
-
-            document.getElementById(
-                "plotTitle"
-            ).textContent =
-                t.plotTitle +
-                " #" +
-                number;
-
-
-            document.getElementById(
-                "detailCity"
-            ).textContent =
-                currentCity;
-
-
-            document.getElementById(
-                "detailNumber"
-            ).textContent =
-                "#" + number;
-
-
-            document.getElementById(
-                "detailStatus"
-            ).textContent =
-                t.ownedStatus;
-
-
-            document.getElementById(
-                "detailPrice"
-            ).textContent =
-                "—";
-
-
-            document.getElementById(
-                "claimBtn"
-            ).style.display =
-                "none";
-
-
-            return;
-
-        }
-
-
-        plot.classList.add(
-            "selected"
-        );
-
-
-        selectedPlot =
-            number;
-
-
-        plotPanel.classList.add(
-            "active"
-        );
-
-
-        const t =
-            translations[
-                currentLanguage
-            ];
-
-
-        document.getElementById(
-            "plotTitle"
-        ).textContent =
-            t.plotTitle +
-            " #" +
-            number;
-
-
-        document.getElementById(
-            "detailCity"
-        ).textContent =
-            currentCity;
-
-
-        document.getElementById(
-            "detailNumber"
-        ).textContent =
-            "#" + number;
-
-
-        document.getElementById(
-            "detailStatus"
-        ).textContent =
-            t.freeStatus;
-
-
-        document.getElementById(
-            "detailPrice"
-        ).textContent =
-            t.price;
-
-
-        document.getElementById(
-            "claimBtn"
-        ).style.display =
-            "inline-block";
-
-    }
-
-
-    document
-        .querySelectorAll(".city")
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    createCityMap(
-                        button.dataset.city
-                    );
-
-                }
-            );
-
-        });
-
-
-    document
-        .getElementById("backCity")
-        .addEventListener(
-            "click",
-            function () {
-
-                mapSection.classList.remove(
-                    "active"
-                );
-
-                citySection.style.display =
-                    "block";
-
-                plotPanel.classList.remove(
-                    "active"
-                );
-
-                citySection.scrollIntoView({
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-
-    /*
-       Кнопка получения участка.
-
-       Пока это демонстрационный режим.
-       Реальную покупку подключим
-       через Supabase.
-    */
-
-    document
-        .getElementById("claimBtn")
-        .addEventListener(
-            "click",
-            function () {
-
-                if (
-                    !currentCity ||
-                    !selectedPlot
-                ) {
-                    return;
-                }
-
-
-                const t =
-                    translations[
-                        currentLanguage
-                    ];
-
-
-                alert(
-                    t.plotTitle +
-                    " #" +
-                    selectedPlot +
-                    "\n" +
-                    currentCity +
-                    "\n\n" +
-                    t.price +
-                    "\n\n" +
-                    (
-                        currentLanguage === "ru"
-                            ? "Система покупки будет подключена на следующем этапе."
-                            :
-                        currentLanguage === "en"
-                            ? "The purchase system will be connected in the next stage."
-                            :
-                        "Purchase system will be connected in the next stage."
-                    )
-                );
-
-            }
-        );
-
-
-    /* =========================================
-       NAVIGATION
-    ========================================= */
-
-    document
-        .getElementById("mapBtn")
-        .addEventListener(
-            "click",
-            function () {
-
-                document
-                    .getElementById("citySection")
-                    .scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-            }
-        );
-
-
-    document
-        .getElementById("aboutBtn")
-        .addEventListener(
-            "click",
-            function () {
-
-                document
-                    .getElementById("aboutSection")
-                    .scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-            }
-        );
-
-
-    document
-        .getElementById("startBtn")
-        .addEventListener(
-            "click",
-            function () {
-
-                document
-                    .getElementById("citySection")
-                    .scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-            }
-        );
+renderCountries();
 
 </script>
 
 </body>
-    </html>
+                            </html>
