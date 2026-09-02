@@ -59,7 +59,8 @@ button {
     margin-bottom: 10px;
 }
 
-.logo span {
+.logo span,
+.header-logo span {
     color: #38a9ff;
 }
 
@@ -80,17 +81,12 @@ button {
     border: 1px solid #244866;
     border-radius: 14px;
     padding: 16px 10px;
-    transition: .2s;
 }
 
-.language-btn:hover {
-    background: #174066;
-    transform: translateY(-2px);
-}
-
+.language-btn:hover,
 .language-btn.active {
+    background: #174066;
     border-color: #38a9ff;
-    background: #123b60;
 }
 
 /* =========================
@@ -120,10 +116,6 @@ button {
     letter-spacing: 3px;
 }
 
-.header-logo span {
-    color: #38a9ff;
-}
-
 .header-right {
     display: flex;
     gap: 10px;
@@ -143,7 +135,7 @@ button {
 }
 
 /* =========================
-   NAVIGATION
+   LOCATION BAR
 ========================= */
 
 .location-bar {
@@ -169,11 +161,63 @@ button {
 }
 
 /* =========================
-   MAP AREA
+   LOCATION SELECTOR
+========================= */
+
+#locationSelector {
+    min-height: calc(100vh - 125px);
+    padding: 30px 22px;
+    background: #06111f;
+}
+
+.selector-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.selector-search {
+    width: 100%;
+    max-width: 700px;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border: 1px solid #244866;
+    background: #0b2035;
+    color: white;
+    outline: none;
+}
+
+.selector-search:focus {
+    border-color: #38a9ff;
+}
+
+.selector-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+}
+
+.selector-button {
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid #244866;
+    background: #102943;
+    color: white;
+    font-size: 16px;
+    text-align: left;
+}
+
+.selector-button:hover {
+    background: #174066;
+    border-color: #38a9ff;
+}
+
+/* =========================
+   MAP
 ========================= */
 
 .map-layout {
-    display: flex;
+    display: none;
     height: calc(100vh - 125px);
     min-height: 550px;
 }
@@ -196,11 +240,6 @@ button {
     transform: translate(-50%, -50%) scale(1);
 }
 
-/*
-   This is a visual prototype of a city.
-   The real geographic map will be connected later.
-*/
-
 .city-shape {
     position: absolute;
     left: 300px;
@@ -209,6 +248,7 @@ button {
     height: 650px;
     background: #102b43;
     border: 2px solid #31526d;
+
     clip-path: polygon(
         5% 20%,
         17% 8%,
@@ -229,8 +269,6 @@ button {
         10% 43%
     );
 }
-
-/* grid */
 
 .plot-grid {
     position: absolute;
@@ -268,7 +306,6 @@ button {
     border-right: 1px solid rgba(98,150,190,.18);
     border-bottom: 1px solid rgba(98,150,190,.18);
     background: rgba(20,55,83,.28);
-    transition: background .12s;
 }
 
 .plot:hover {
@@ -289,7 +326,7 @@ button {
 }
 
 /* =========================
-   MAP CONTROLS
+   CONTROLS
 ========================= */
 
 .map-controls {
@@ -415,7 +452,7 @@ button {
 }
 
 /* =========================
-   BOTTOM LEGEND
+   LEGEND
 ========================= */
 
 .legend {
@@ -478,6 +515,10 @@ button {
         padding: 0 12px;
     }
 
+    .header-logo {
+        font-size: 21px;
+    }
+
     .header-btn {
         padding: 8px 9px;
         font-size: 12px;
@@ -523,15 +564,23 @@ button {
         width: 800px;
         height: 500px;
     }
+
+    #locationSelector {
+        padding: 25px 15px;
+    }
+
+    .selector-title {
+        font-size: 23px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
+<!-- =========================================================
      LANGUAGE SCREEN
-========================= -->
+========================================================= -->
 
 <div id="languageScreen" class="screen">
 
@@ -552,9 +601,9 @@ button {
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      MAIN APPLICATION
-========================= -->
+========================================================= -->
 
 <div id="app">
 
@@ -578,6 +627,8 @@ button {
 
     </header>
 
+
+    <!-- LOCATION PATH -->
 
     <div class="location-bar">
 
@@ -604,9 +655,14 @@ button {
     </div>
 
 
-    <div class="map-layout">
+    <!-- COUNTRY / CITY SELECTOR -->
 
-        <!-- MAP -->
+    <div id="locationSelector"></div>
+
+
+    <!-- MAP -->
+
+    <div class="map-layout" id="mapLayout">
 
         <main class="map-container" id="mapContainer">
 
@@ -762,7 +818,6 @@ button {
                 id="buyButton"
                 onclick="buyPlot()"
                 disabled
-                data-i18n="selectPlotFirst"
             >
                 Select a plot first
             </button>
@@ -774,909 +829,398 @@ button {
 </div>
 
 
+<!-- =========================================================
+     LOCATIONS DATABASE
+========================================================= -->
+
+<script src="locations.js"></script>
+
+
 <script>
 
-/* ============================================================
-   WORLDPIX 0.5
-   CORE DATA
-============================================================ */
+/* =========================================================
+   LANGUAGES
+========================================================= */
 
 const languages = [
 
-    {
-        id: "en",
-        name: "English",
-        flag: "🇬🇧"
-    },
+    { id: "en", name: "English", flag: "🇬🇧" },
 
-    {
-        id: "ru",
-        name: "Русский",
-        flag: "🇷🇺"
-    },
+    { id: "ru", name: "Русский", flag: "🇷🇺" },
 
-    {
-        id: "de",
-        name: "Deutsch",
-        flag: "🇩🇪"
-    },
+    { id: "de", name: "Deutsch", flag: "🇩🇪" },
 
-    {
-        id: "fr",
-        name: "Français",
-        flag: "🇫🇷"
-    },
+    { id: "fr", name: "Français", flag: "🇫🇷" },
 
-    {
-        id: "es",
-        name: "Español",
-        flag: "🇪🇸"
-    },
+    { id: "es", name: "Español", flag: "🇪🇸" },
 
-    {
-        id: "it",
-        name: "Italiano",
-        flag: "🇮🇹"
-    },
+    { id: "it", name: "Italiano", flag: "🇮🇹" },
 
-    {
-        id: "pt",
-        name: "Português",
-        flag: "🇵🇹"
-    },
+    { id: "pt", name: "Português", flag: "🇵🇹" },
 
-    {
-        id: "tr",
-        name: "Türkçe",
-        flag: "🇹🇷"
-    },
+    { id: "tr", name: "Türkçe", flag: "🇹🇷" },
 
-    {
-        id: "zh",
-        name: "中文",
-        flag: "🇨🇳"
-    },
+    { id: "zh", name: "中文", flag: "🇨🇳" },
 
-    {
-        id: "ja",
-        name: "日本語",
-        flag: "🇯🇵"
-    },
+    { id: "ja", name: "日本語", flag: "🇯🇵" },
 
-    {
-        id: "ko",
-        name: "한국어",
-        flag: "🇰🇷"
-    },
+    { id: "ko", name: "한국어", flag: "🇰🇷" },
 
-    {
-        id: "ar",
-        name: "العربية",
-        flag: "🇸🇦"
-    }
+    { id: "ar", name: "العربية", flag: "🇸🇦" }
 
 ];
 
 
-/* ============================================================
+/* =========================================================
    TRANSLATIONS
-============================================================ */
+========================================================= */
 
 const T = {
 
 en: {
-
     languageSubtitle: "Choose your language",
-
     profile: "Profile",
-
     market: "Marketplace",
-
     free: "Free",
-
     owned: "Owned",
-
     selected: "Selected",
-
     mapTitle: "WORLDPIX MAP",
-
     mapSubtitle: "Select a digital plot",
-
     totalPlots: "TOTAL PLOTS",
-
     cityPlots: "CITY PLOTS",
-
     selectedPlot: "Selected plot",
-
     status: "Status",
-
     price: "Price",
-
     coordinates: "Coordinates",
-
     selectPlotFirst: "Select a plot first",
-
     available: "Available",
-
-    yourPlot: "Your plot",
-
     occupied: "Occupied",
-
     buy: "Buy plot",
-
     comingSoon: "This feature will be connected soon.",
-
-    noPlot: "No plot selected"
-
+    chooseCountry: "Choose a country",
+    chooseCity: "Choose a city",
+    searchCountry: "Search country...",
+    searchCity: "Search city..."
 },
 
 ru: {
-
     languageSubtitle: "Выберите язык",
-
     profile: "Профиль",
-
     market: "Маркетплейс",
-
     free: "Свободен",
-
     owned: "Ваш",
-
     selected: "Выбран",
-
     mapTitle: "КАРТА WORLDPIX",
-
     mapSubtitle: "Выберите цифровой участок",
-
     totalPlots: "ВСЕГО УЧАСТКОВ",
-
     cityPlots: "УЧАСТКИ ГОРОДА",
-
     selectedPlot: "Выбранный участок",
-
     status: "Статус",
-
     price: "Цена",
-
     coordinates: "Координаты",
-
     selectPlotFirst: "Сначала выберите участок",
-
     available: "Свободен",
-
-    yourPlot: "Ваш участок",
-
     occupied: "Занят",
-
     buy: "Купить участок",
-
     comingSoon: "Эта функция будет подключена на следующем этапе.",
-
-    noPlot: "Участок не выбран"
-
+    chooseCountry: "Выберите страну",
+    chooseCity: "Выберите город",
+    searchCountry: "Поиск страны...",
+    searchCity: "Поиск города..."
 },
 
 de: {
-
     languageSubtitle: "Sprache auswählen",
-
     profile: "Profil",
-
     market: "Marktplatz",
-
     free: "Frei",
-
     owned: "Dein",
-
     selected: "Ausgewählt",
-
     mapTitle: "WORLDPIX KARTE",
-
     mapSubtitle: "Digitales Grundstück auswählen",
-
     totalPlots: "GRUNDSTÜCKE GESAMT",
-
     cityPlots: "STADTGRUNDSTÜCKE",
-
     selectedPlot: "Ausgewähltes Grundstück",
-
     status: "Status",
-
     price: "Preis",
-
     coordinates: "Koordinaten",
-
     selectPlotFirst: "Grundstück auswählen",
-
     available: "Verfügbar",
-
-    yourPlot: "Dein Grundstück",
-
     occupied: "Belegt",
-
     buy: "Grundstück kaufen",
-
     comingSoon: "Diese Funktion wird später verbunden.",
-
-    noPlot: "Kein Grundstück ausgewählt"
-
+    chooseCountry: "Land auswählen",
+    chooseCity: "Stadt auswählen",
+    searchCountry: "Land suchen...",
+    searchCity: "Stadt suchen..."
 },
 
 fr: {
-
     languageSubtitle: "Choisissez votre langue",
-
     profile: "Profil",
-
     market: "Marché",
-
     free: "Libre",
-
     owned: "Votre",
-
     selected: "Sélectionné",
-
     mapTitle: "CARTE WORLDPIX",
-
     mapSubtitle: "Sélectionnez une parcelle numérique",
-
     totalPlots: "TOTAL DES PARCELLES",
-
     cityPlots: "PARCELLES DE LA VILLE",
-
     selectedPlot: "Parcelle sélectionnée",
-
     status: "Statut",
-
     price: "Prix",
-
     coordinates: "Coordonnées",
-
     selectPlotFirst: "Sélectionnez une parcelle",
-
     available: "Disponible",
-
-    yourPlot: "Votre parcelle",
-
     occupied: "Occupée",
-
     buy: "Acheter",
-
     comingSoon: "Cette fonction sera connectée prochainement.",
-
-    noPlot: "Aucune parcelle sélectionnée"
-
+    chooseCountry: "Choisissez un pays",
+    chooseCity: "Choisissez une ville",
+    searchCountry: "Rechercher un pays...",
+    searchCity: "Rechercher une ville..."
 },
 
 es: {
-
     languageSubtitle: "Elige tu idioma",
-
     profile: "Perfil",
-
     market: "Mercado",
-
     free: "Libre",
-
     owned: "Tuya",
-
     selected: "Seleccionada",
-
     mapTitle: "MAPA WORLDPIX",
-
     mapSubtitle: "Selecciona una parcela digital",
-
     totalPlots: "PARCELAS TOTALES",
-
     cityPlots: "PARCELAS DE LA CIUDAD",
-
     selectedPlot: "Parcela seleccionada",
-
     status: "Estado",
-
     price: "Precio",
-
     coordinates: "Coordenadas",
-
     selectPlotFirst: "Selecciona una parcela",
-
     available: "Disponible",
-
-    yourPlot: "Tu parcela",
-
     occupied: "Ocupada",
-
     buy: "Comprar parcela",
-
     comingSoon: "Esta función se conectará próximamente.",
-
-    noPlot: "Ninguna parcela seleccionada"
-
+    chooseCountry: "Elige un país",
+    chooseCity: "Elige una ciudad",
+    searchCountry: "Buscar país...",
+    searchCity: "Buscar ciudad..."
 },
 
 it: {
-
     languageSubtitle: "Scegli la lingua",
-
     profile: "Profilo",
-
     market: "Mercato",
-
     free: "Libero",
-
     owned: "Tuo",
-
     selected: "Selezionato",
-
     mapTitle: "MAPPA WORLDPIX",
-
     mapSubtitle: "Seleziona un lotto digitale",
-
     totalPlots: "LOTTI TOTALI",
-
     cityPlots: "LOTTI DELLA CITTÀ",
-
     selectedPlot: "Lotto selezionato",
-
     status: "Stato",
-
     price: "Prezzo",
-
     coordinates: "Coordinate",
-
     selectPlotFirst: "Seleziona un lotto",
-
     available: "Disponibile",
-
-    yourPlot: "Il tuo lotto",
-
     occupied: "Occupato",
-
     buy: "Acquista lotto",
-
     comingSoon: "Questa funzione sarà collegata prossimamente.",
-
-    noPlot: "Nessun lotto selezionato"
-
+    chooseCountry: "Scegli un paese",
+    chooseCity: "Scegli una città",
+    searchCountry: "Cerca paese...",
+    searchCity: "Cerca città..."
 },
 
 pt: {
-
     languageSubtitle: "Escolha seu idioma",
-
     profile: "Perfil",
-
     market: "Mercado",
-
     free: "Livre",
-
     owned: "Seu",
-
     selected: "Selecionado",
-
     mapTitle: "MAPA WORLDPIX",
-
     mapSubtitle: "Selecione um terreno digital",
-
     totalPlots: "TERRENOS TOTAIS",
-
     cityPlots: "TERRENOS DA CIDADE",
-
     selectedPlot: "Terreno selecionado",
-
     status: "Status",
-
     price: "Preço",
-
     coordinates: "Coordenadas",
-
     selectPlotFirst: "Selecione um terreno",
-
     available: "Disponível",
-
-    yourPlot: "Seu terreno",
-
     occupied: "Ocupado",
-
     buy: "Comprar terreno",
-
     comingSoon: "Esta função será conectada em breve.",
-
-    noPlot: "Nenhum terreno selecionado"
-
+    chooseCountry: "Escolha um país",
+    chooseCity: "Escolha uma cidade",
+    searchCountry: "Pesquisar país...",
+    searchCity: "Pesquisar cidade..."
 },
 
 tr: {
-
     languageSubtitle: "Dilinizi seçin",
-
     profile: "Profil",
-
     market: "Pazar",
-
     free: "Boş",
-
     owned: "Sizin",
-
     selected: "Seçildi",
-
     mapTitle: "WORLDPIX HARİTASI",
-
     mapSubtitle: "Dijital parsel seçin",
-
     totalPlots: "TOPLAM PARSEL",
-
     cityPlots: "ŞEHİR PARSELLERİ",
-
     selectedPlot: "Seçilen parsel",
-
     status: "Durum",
-
     price: "Fiyat",
-
     coordinates: "Koordinatlar",
-
     selectPlotFirst: "Önce parsel seçin",
-
     available: "Mevcut",
-
-    yourPlot: "Parseliniz",
-
     occupied: "Dolu",
-
     buy: "Parsel satın al",
-
     comingSoon: "Bu özellik yakında bağlanacak.",
-
-    noPlot: "Parsel seçilmedi"
-
+    chooseCountry: "Ülke seçin",
+    chooseCity: "Şehir seçin",
+    searchCountry: "Ülke ara...",
+    searchCity: "Şehir ara..."
 },
 
 zh: {
-
     languageSubtitle: "选择语言",
-
     profile: "个人资料",
-
     market: "市场",
-
     free: "空闲",
-
     owned: "我的",
-
     selected: "已选择",
-
     mapTitle: "WORLDPIX 地图",
-
     mapSubtitle: "选择数字地块",
-
     totalPlots: "地块总数",
-
     cityPlots: "城市地块",
-
     selectedPlot: "已选地块",
-
     status: "状态",
-
     price: "价格",
-
     coordinates: "坐标",
-
     selectPlotFirst: "请先选择地块",
-
     available: "可购买",
-
-    yourPlot: "你的地块",
-
     occupied: "已占用",
-
     buy: "购买地块",
-
     comingSoon: "此功能将在后续阶段连接。",
-
-    noPlot: "未选择地块"
-
+    chooseCountry: "选择国家",
+    chooseCity: "选择城市",
+    searchCountry: "搜索国家...",
+    searchCity: "搜索城市..."
 },
 
 ja: {
-
     languageSubtitle: "言語を選択",
-
     profile: "プロフィール",
-
     market: "マーケット",
-
     free: "空き",
-
     owned: "自分",
-
     selected: "選択中",
-
     mapTitle: "WORLDPIX マップ",
-
     mapSubtitle: "デジタル区画を選択",
-
     totalPlots: "総区画数",
-
     cityPlots: "都市区画",
-
     selectedPlot: "選択した区画",
-
     status: "状態",
-
     price: "価格",
-
     coordinates: "座標",
-
     selectPlotFirst: "区画を選択してください",
-
     available: "利用可能",
-
-    yourPlot: "あなたの区画",
-
     occupied: "使用中",
-
     buy: "区画を購入",
-
     comingSoon: "この機能は後で接続されます。",
-
-    noPlot: "区画が選択されていません"
-
+    chooseCountry: "国を選択",
+    chooseCity: "都市を選択",
+    searchCountry: "国を検索...",
+    searchCity: "都市を検索..."
 },
 
 ko: {
-
     languageSubtitle: "언어 선택",
-
     profile: "프로필",
-
     market: "마켓플레이스",
-
     free: "사용 가능",
-
     owned: "내 소유",
-
     selected: "선택됨",
-
     mapTitle: "WORLDPIX 지도",
-
     mapSubtitle: "디지털 토지를 선택하세요",
-
     totalPlots: "전체 토지",
-
     cityPlots: "도시 토지",
-
     selectedPlot: "선택한 토지",
-
     status: "상태",
-
     price: "가격",
-
     coordinates: "좌표",
-
     selectPlotFirst: "먼저 토지를 선택하세요",
-
     available: "구매 가능",
-
-    yourPlot: "내 토지",
-
     occupied: "사용 중",
-
     buy: "토지 구매",
-
     comingSoon: "이 기능은 다음 단계에서 연결됩니다.",
-
-    noPlot: "선택된 토지 없음"
-
+    chooseCountry: "국가 선택",
+    chooseCity: "도시 선택",
+    searchCountry: "국가 검색...",
+    searchCity: "도시 검색..."
 },
 
 ar: {
-
     languageSubtitle: "اختر لغتك",
-
     profile: "الملف الشخصي",
-
     market: "السوق",
-
     free: "متاح",
-
     owned: "ملكك",
-
     selected: "محدد",
-
     mapTitle: "خريطة WORLDPIX",
-
     mapSubtitle: "اختر قطعة رقمية",
-
     totalPlots: "إجمالي القطع",
-
     cityPlots: "قطع المدينة",
-
     selectedPlot: "القطعة المحددة",
-
     status: "الحالة",
-
     price: "السعر",
-
     coordinates: "الإحداثيات",
-
     selectPlotFirst: "اختر قطعة أولاً",
-
     available: "متاحة",
-
-    yourPlot: "قطعتك",
-
     occupied: "مشغولة",
-
     buy: "شراء القطعة",
-
     comingSoon: "سيتم ربط هذه الوظيفة في مرحلة لاحقة.",
-
-    noPlot: "لم يتم اختيار قطعة"
-
+    chooseCountry: "اختر الدولة",
+    chooseCity: "اختر المدينة",
+    searchCountry: "البحث عن دولة...",
+    searchCity: "البحث عن مدينة..."
 }
 
 };
 
 
-/* ============================================================
-   COUNTRY / CITY DATA
-============================================================ */
+/* =========================================================
+   DATA
+========================================================= */
 
-const locations = {
+/*
+   Берём данные из locations.js.
 
-    ru: {
-        id: "russia",
-        names: {
-            ru: "Россия",
-            en: "Russia",
-            zh: "俄罗斯",
-            ja: "ロシア"
-        },
-        cities: [
-            {
-                id: "moscow",
-                names: {
-                    ru: "Москва",
-                    en: "Moscow",
-                    zh: "莫斯科",
-                    ja: "モスクワ"
-                }
-            },
-            {
-                id: "saint_petersburg",
-                names: {
-                    ru: "Санкт-Петербург",
-                    en: "Saint Petersburg",
-                    zh: "圣彼得堡",
-                    ja: "サンクトペテルブルク"
-                }
-            }
-        ]
-    },
+   Поддерживаются оба варианта:
+   WORLDPIX_LOCATIONS
+   или
+   locations
+*/
 
-    us: {
-        id: "usa",
-        names: {
-            ru: "США",
-            en: "United States",
-            zh: "美国",
-            ja: "アメリカ"
-        },
-        cities: [
-            {
-                id: "new_york",
-                names: {
-                    ru: "Нью-Йорк",
-                    en: "New York",
-                    zh: "纽约",
-                    ja: "ニューヨーク"
-                }
-            },
-            {
-                id: "los_angeles",
-                names: {
-                    ru: "Лос-Анджелес",
-                    en: "Los Angeles",
-                    zh: "洛杉矶",
-                    ja: "ロサンゼルス"
-                }
-            }
-        ]
-    },
+let WORLDPIX_DATA = {};
 
-    de: {
-        id: "germany",
-        names: {
-            ru: "Германия",
-            en: "Germany",
-            zh: "德国",
-            ja: "ドイツ"
-        },
-        cities: [
-            {
-                id: "berlin",
-                names: {
-                    ru: "Берлин",
-                    en: "Berlin",
-                    zh: "柏林",
-                    ja: "ベルリン"
-                }
-            }
-        ]
-    },
+if (window.WORLDPIX_LOCATIONS) {
 
-    fr: {
-        id: "france",
-        names: {
-            ru: "Франция",
-            en: "France",
-            zh: "法国",
-            ja: "フランス"
-        },
-        cities: [
-            {
-                id: "paris",
-                names: {
-                    ru: "Париж",
-                    en: "Paris",
-                    zh: "巴黎",
-                    ja: "パリ"
-                }
-            }
-        ]
-    },
+    WORLDPIX_DATA = window.WORLDPIX_LOCATIONS;
 
-    gb: {
-        id: "uk",
-        names: {
-            ru: "Великобритания",
-            en: "United Kingdom",
-            zh: "英国",
-            ja: "イギリス"
-        },
-        cities: [
-            {
-                id: "london",
-                names: {
-                    ru: "Лондон",
-                    en: "London",
-                    zh: "伦敦",
-                    ja: "ロンドン"
-                }
-            }
-        ]
-    },
+} else if (typeof locations !== "undefined") {
 
-    cn: {
-        id: "china",
-        names: {
-            ru: "Китай",
-            en: "China",
-            zh: "中国",
-            ja: "中国"
-        },
-        cities: [
-            {
-                id: "beijing",
-                names: {
-                    ru: "Пекин",
-                    en: "Beijing",
-                    zh: "北京",
-                    ja: "北京"
-                }
-            },
-            {
-                id: "shanghai",
-                names: {
-                    ru: "Шанхай",
-                    en: "Shanghai",
-                    zh: "上海",
-                    ja: "上海"
-                }
-            }
-        ]
-    },
+    WORLDPIX_DATA = locations;
 
-    jp: {
-        id: "japan",
-        names: {
-            ru: "Япония",
-            en: "Japan",
-            zh: "日本",
-            ja: "日本"
-        },
-        cities: [
-            {
-                id: "tokyo",
-                names: {
-                    ru: "Токио",
-                    en: "Tokyo",
-                    zh: "东京",
-                    ja: "東京"
-                }
-            }
-        ]
-    },
-
-    in: {
-        id: "india",
-        names: {
-            ru: "Индия",
-            en: "India",
-            zh: "印度",
-            ja: "インド"
-        },
-        cities: [
-            {
-                id: "delhi",
-                names: {
-                    ru: "Дели",
-                    en: "Delhi",
-                    zh: "德里",
-                    ja: "デリー"
-                }
-            },
-            {
-                id: "mumbai",
-                names: {
-                    ru: "Мумбаи",
-                    en: "Mumbai",
-                    zh: "孟买",
-                    ja: "ムンバイ"
-                }
-            }
-        ]
-    },
-
-    br: {
-        id: "brazil",
-        names: {
-            ru: "Бразилия",
-            en: "Brazil",
-            zh: "巴西",
-            ja: "ブラジル"
-        },
-        cities: [
-            {
-                id: "sao_paulo",
-                names: {
-                    ru: "Сан-Паулу",
-                    en: "São Paulo",
-                    zh: "圣保罗",
-                    ja: "サンパウロ"
-                }
-            }
-        ]
-    },
-
-    tr: {
-        id: "turkey",
-        names: {
-            ru: "Турция",
-            en: "Türkiye",
-            zh: "土耳其",
-            ja: "トルコ"
-        },
-        cities: [
-            {
-                id: "istanbul",
-                names: {
-                    ru: "Стамбул",
-                    en: "Istanbul",
-                    zh: "伊斯坦布尔",
-                    ja: "イスタンブール"
-                }
-            }
-        ]
-    }
-
-};
+}
 
 
-/* ============================================================
+/* =========================================================
    GLOBAL STATE
-============================================================ */
+========================================================= */
 
 let currentLanguage =
     localStorage.getItem("worldpix_language") || null;
@@ -1690,9 +1234,48 @@ let selectedPlot = null;
 let zoom = 1;
 
 
-/* ============================================================
-   LANGUAGE SCREEN
-============================================================ */
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function getLocalizedName(object) {
+
+    if (!object || !object.names) {
+        return "";
+    }
+
+    return (
+        object.names[currentLanguage] ||
+        object.names.en ||
+        object.names.ru ||
+        Object.values(object.names)[0] ||
+        ""
+    );
+}
+
+
+function getCountries() {
+
+    if (Array.isArray(WORLDPIX_DATA)) {
+        return WORLDPIX_DATA;
+    }
+
+    return Object.values(WORLDPIX_DATA);
+}
+
+
+function updateDirection() {
+
+    document.documentElement.dir =
+        currentLanguage === "ar"
+            ? "rtl"
+            : "ltr";
+}
+
+
+/* =========================================================
+   LANGUAGE BUTTONS
+========================================================= */
 
 function buildLanguages() {
 
@@ -1708,22 +1291,24 @@ function buildLanguages() {
 
         button.className = "language-btn";
 
-        button.innerHTML =
+        button.textContent =
             language.flag + " " + language.name;
 
-        button.onclick = () =>
+        button.onclick = function() {
+
             selectLanguage(language.id);
+
+        };
 
         container.appendChild(button);
 
     });
-
 }
 
 
-/* ============================================================
+/* =========================================================
    SELECT LANGUAGE
-============================================================ */
+========================================================= */
 
 function selectLanguage(languageId) {
 
@@ -1737,6 +1322,8 @@ function selectLanguage(languageId) {
     document.documentElement.lang =
         languageId;
 
+    updateDirection();
+
     document.getElementById(
         "languageScreen"
     ).style.display = "none";
@@ -1748,13 +1335,12 @@ function selectLanguage(languageId) {
     updateTexts();
 
     startWorldPix();
-
 }
 
 
-/* ============================================================
+/* =========================================================
    TRANSLATION
-============================================================ */
+========================================================= */
 
 function updateTexts() {
 
@@ -1779,109 +1365,428 @@ function updateTexts() {
         "languageSubtitle"
     ).textContent =
         lang.languageSubtitle;
-
 }
 
 
-/* ============================================================
+/* =========================================================
    START
-============================================================ */
+========================================================= */
 
 function startWorldPix() {
 
     /*
-       Demo location.
-       Later this will be replaced with:
-       language → country → city → map
+       ВАЖНО:
+
+       Никакая страна и город больше
+       НЕ выбираются автоматически.
+
+       Сначала показываем страны.
     */
 
-    selectedCountry =
-        locations.ru;
+    selectedCountry = null;
+    selectedCity = null;
+    selectedPlot = null;
 
-    selectedCity =
-        locations.ru.cities[0];
+    document.getElementById(
+        "mapLayout"
+    ).style.display = "none";
 
-    updateLocationDisplay();
+    document.getElementById(
+        "countryDisplay"
+    ).textContent = "🌍";
 
-    createPlots();
+    document.getElementById(
+        "cityDisplay"
+    ).textContent = "🏙️";
 
+    showCountrySelection();
 }
 
 
-/* ============================================================
-   LOCATION DISPLAY
-============================================================ */
+/* =========================================================
+   COUNTRY SELECTION
+========================================================= */
 
-function getLocalizedName(object) {
+function showCountrySelection() {
 
-    if (!object || !object.names) {
-        return "";
+    const selector =
+        document.getElementById(
+            "locationSelector"
+        );
+
+    selector.style.display = "block";
+
+    selector.innerHTML = "";
+
+    const lang =
+        T[currentLanguage] || T.en;
+
+
+    const title =
+        document.createElement("h2");
+
+    title.className =
+        "selector-title";
+
+    title.textContent =
+        lang.chooseCountry;
+
+    selector.appendChild(title);
+
+
+    const search =
+        document.createElement("input");
+
+    search.className =
+        "selector-search";
+
+    search.type = "text";
+
+    search.placeholder =
+        lang.searchCountry;
+
+    selector.appendChild(search);
+
+
+    const list =
+        document.createElement("div");
+
+    list.className =
+        "selector-list";
+
+    selector.appendChild(list);
+
+
+    function renderCountries(filter = "") {
+
+        list.innerHTML = "";
+
+        const normalized =
+            filter.trim().toLowerCase();
+
+        getCountries().forEach(country => {
+
+            const name =
+                getLocalizedName(country);
+
+            if (
+                normalized &&
+                !name
+                    .toLowerCase()
+                    .includes(normalized)
+            ) {
+                return;
+            }
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "selector-button";
+
+            button.textContent =
+                "🌍 " + name;
+
+            button.onclick = function() {
+
+                selectCountry(country);
+
+            };
+
+            list.appendChild(button);
+
+        });
+
     }
 
-    return (
-        object.names[currentLanguage] ||
-        object.names.en ||
-        object.names.ru ||
-        ""
+
+    search.addEventListener(
+        "input",
+        function() {
+
+            renderCountries(
+                this.value
+            );
+
+        }
     );
 
+
+    renderCountries();
 }
 
 
-function updateLocationDisplay() {
+/* =========================================================
+   SELECT COUNTRY
+========================================================= */
+
+function selectCountry(country) {
+
+    selectedCountry = country;
+
+    selectedCity = null;
+
+    selectedPlot = null;
 
     document.getElementById(
         "countryDisplay"
     ).textContent =
-        "🌍 " + getLocalizedName(selectedCountry);
+        "🌍 " +
+        getLocalizedName(country);
 
     document.getElementById(
         "cityDisplay"
     ).textContent =
-        "🏙️ " + getLocalizedName(selectedCity);
+        "🏙️";
 
+    document.getElementById(
+        "mapLayout"
+    ).style.display = "none";
+
+    showCitySelection();
 }
 
 
-/* ============================================================
-   CREATE MAP PLOTS
-============================================================ */
+/* =========================================================
+   CITY SELECTION
+========================================================= */
+
+function showCitySelection() {
+
+    const selector =
+        document.getElementById(
+            "locationSelector"
+        );
+
+    selector.style.display = "block";
+
+    selector.innerHTML = "";
+
+    const lang =
+        T[currentLanguage] || T.en;
+
+
+    const title =
+        document.createElement("h2");
+
+    title.className =
+        "selector-title";
+
+    title.textContent =
+        lang.chooseCity;
+
+    selector.appendChild(title);
+
+
+    const search =
+        document.createElement("input");
+
+    search.className =
+        "selector-search";
+
+    search.type = "text";
+
+    search.placeholder =
+        lang.searchCity;
+
+    selector.appendChild(search);
+
+
+    const list =
+        document.createElement("div");
+
+    list.className =
+        "selector-list";
+
+    selector.appendChild(list);
+
+
+    const cities =
+        selectedCountry &&
+        Array.isArray(selectedCountry.cities)
+            ? selectedCountry.cities
+            : [];
+
+
+    function renderCities(filter = "") {
+
+        list.innerHTML = "";
+
+        const normalized =
+            filter.trim().toLowerCase();
+
+        cities.forEach(city => {
+
+            const name =
+                getLocalizedName(city);
+
+            if (
+                normalized &&
+                !name
+                    .toLowerCase()
+                    .includes(normalized)
+            ) {
+                return;
+            }
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "selector-button";
+
+            button.textContent =
+                "🏙️ " + name;
+
+            button.onclick = function() {
+
+                selectCity(city);
+
+            };
+
+            list.appendChild(button);
+
+        });
+
+
+        if (cities.length === 0) {
+
+            const empty =
+                document.createElement("div");
+
+            empty.style.color =
+                "#829ab1";
+
+            empty.textContent =
+                currentLanguage === "ru"
+                    ? "Города пока не добавлены."
+                    : "No cities available yet.";
+
+            list.appendChild(empty);
+
+        }
+
+    }
+
+
+    search.addEventListener(
+        "input",
+        function() {
+
+            renderCities(
+                this.value
+            );
+
+        }
+    );
+
+
+    renderCities();
+}
+
+
+/* =========================================================
+   SELECT CITY
+========================================================= */
+
+function selectCity(city) {
+
+    selectedCity = city;
+
+    selectedPlot = null;
+
+    document.getElementById(
+        "countryDisplay"
+    ).textContent =
+        "🌍 " +
+        getLocalizedName(selectedCountry);
+
+    document.getElementById(
+        "cityDisplay"
+    ).textContent =
+        "🏙️ " +
+        getLocalizedName(selectedCity);
+
+
+    document.getElementById(
+        "locationSelector"
+    ).style.display = "none";
+
+
+    /*
+       ТОЛЬКО ЗДЕСЬ появляется карта.
+    */
+
+    document.getElementById(
+        "mapLayout"
+    ).style.display = "flex";
+
+
+    createPlots();
+}
+
+
+/* =========================================================
+   PLOT ID
+========================================================= */
+
+function createPlotId(x, y) {
+
+    const city =
+        selectedCity
+            ? selectedCity.id.toUpperCase()
+            : "CITY";
+
+    return (
+        "WPX-" +
+        city +
+        "-" +
+        String(x).padStart(4, "0") +
+        "-" +
+        String(y).padStart(4, "0")
+    );
+}
+
+
+/* =========================================================
+   CREATE PROTOTYPE PLOTS
+========================================================= */
 
 function createPlots() {
 
     const grid =
-        document.getElementById("plotGrid");
+        document.getElementById(
+            "plotGrid"
+        );
 
     grid.innerHTML = "";
 
     /*
-       IMPORTANT:
+       Только визуальный прототип.
 
-       We do NOT create 100,000,000 DOM elements.
-
-       This demo displays only 40 × 26 = 1040
-       visible prototype cells.
-
-       The real WORLDPIX system will use
-       Canvas/WebGL/virtual rendering.
+       НЕ создаём 100 000 000 DOM элементов.
     */
 
     const columns = 40;
 
     const rows = 26;
 
-    for (let y = 0; y < rows; y++) {
+    for (
+        let y = 0;
+        y < rows;
+        y++
+    ) {
 
-        for (let x = 0; x < columns; x++) {
+        for (
+            let x = 0;
+            x < columns;
+            x++
+        ) {
 
             const plot =
                 document.createElement("div");
 
             plot.className = "plot";
-
-            /*
-               Simulated statuses
-            */
 
             const random =
                 Math.random();
@@ -1902,20 +1807,18 @@ function createPlots() {
             plot.dataset.id =
                 plotId;
 
-            plot.dataset.x =
-                x;
-
-            plot.dataset.y =
-                y;
-
             plot.addEventListener(
                 "click",
-                () => selectPlot(
-                    plot,
-                    x,
-                    y,
-                    plotId
-                )
+                function() {
+
+                    selectPlot(
+                        plot,
+                        x,
+                        y,
+                        plotId
+                    );
+
+                }
             );
 
             grid.appendChild(plot);
@@ -1923,36 +1826,12 @@ function createPlots() {
         }
 
     }
-
 }
 
 
-/* ============================================================
-   PLOT ID
-============================================================ */
-
-function createPlotId(x, y) {
-
-    const city =
-        selectedCity
-            ? selectedCity.id.toUpperCase()
-            : "CITY";
-
-    return (
-        "WPX-" +
-        city +
-        "-" +
-        String(x).padStart(4, "0") +
-        "-" +
-        String(y).padStart(4, "0")
-    );
-
-}
-
-
-/* ============================================================
+/* =========================================================
    SELECT PLOT
-============================================================ */
+========================================================= */
 
 function selectPlot(
     element,
@@ -1965,11 +1844,17 @@ function selectPlot(
         .querySelectorAll(".plot.selected")
         .forEach(plot => {
 
-            plot.classList.remove("selected");
+            plot.classList.remove(
+                "selected"
+            );
 
         });
 
-    element.classList.add("selected");
+
+    element.classList.add(
+        "selected"
+    );
+
 
     selectedPlot = {
 
@@ -1983,89 +1868,85 @@ function selectPlot(
 
     };
 
+
     const isOwned =
-        element.classList.contains("owned");
+        element.classList.contains(
+            "owned"
+        );
 
-    const isFree =
-        element.classList.contains("free");
 
-    let status;
+    const lang =
+        T[currentLanguage] || T.en;
 
-    if (isOwned) {
-
-        status =
-            T[currentLanguage].occupied;
-
-    } else if (isFree) {
-
-        status =
-            T[currentLanguage].available;
-
-    } else {
-
-        status =
-            T[currentLanguage].available;
-
-    }
 
     document.getElementById(
         "plotId"
     ).textContent =
         plotId;
 
+
     document.getElementById(
         "plotStatus"
     ).textContent =
-        status;
+        isOwned
+            ? lang.occupied
+            : lang.available;
+
 
     document.getElementById(
         "plotPrice"
     ).textContent =
         "€1";
 
+
     document.getElementById(
         "plotCoordinates"
     ).textContent =
-        "X: " + x + " / Y: " + y;
+        "X: " +
+        x +
+        " / Y: " +
+        y;
+
 
     const buyButton =
         document.getElementById(
             "buyButton"
         );
 
+
     buyButton.disabled =
         isOwned;
 
+
     buyButton.textContent =
         isOwned
-            ? T[currentLanguage].occupied
-            : T[currentLanguage].buy;
-
+            ? lang.occupied
+            : lang.buy;
 }
 
 
-/* ============================================================
+/* =========================================================
    BUY
-============================================================ */
+========================================================= */
 
 function buyPlot() {
 
     if (!selectedPlot) {
-
         return;
-
     }
 
-    alert(
-        T[currentLanguage].comingSoon
-    );
+    const lang =
+        T[currentLanguage] || T.en;
 
+    alert(
+        lang.comingSoon
+    );
 }
 
 
-/* ============================================================
+/* =========================================================
    ZOOM
-============================================================ */
+========================================================= */
 
 function applyZoom() {
 
@@ -2079,11 +1960,12 @@ function applyZoom() {
         zoom +
         ")";
 
+
     document.getElementById(
         "zoomLevel"
     ).textContent =
-        Math.round(zoom * 100) + "%";
-
+        Math.round(zoom * 100) +
+        "%";
 }
 
 
@@ -2096,7 +1978,6 @@ function zoomIn() {
     }
 
     applyZoom();
-
 }
 
 
@@ -2109,7 +1990,6 @@ function zoomOut() {
     }
 
     applyZoom();
-
 }
 
 
@@ -2118,13 +1998,12 @@ function resetZoom() {
     zoom = 1;
 
     applyZoom();
-
 }
 
 
-/* ============================================================
+/* =========================================================
    DRAG / PAN
-============================================================ */
+========================================================= */
 
 let dragging = false;
 
@@ -2136,10 +2015,12 @@ let currentX = 0;
 
 let currentY = 0;
 
+
 const mapContainer =
     document.getElementById(
         "mapContainer"
     );
+
 
 const mapWorld =
     document.getElementById(
@@ -2162,10 +2043,12 @@ mapContainer.addEventListener(
         dragging = true;
 
         startX =
-            event.clientX - currentX;
+            event.clientX -
+            currentX;
 
         startY =
-            event.clientY - currentY;
+            event.clientY -
+            currentY;
 
         mapContainer.setPointerCapture(
             event.pointerId
@@ -2184,10 +2067,12 @@ mapContainer.addEventListener(
         }
 
         currentX =
-            event.clientX - startX;
+            event.clientX -
+            startX;
 
         currentY =
-            event.clientY - startY;
+            event.clientY -
+            startY;
 
         mapWorld.style.marginLeft =
             currentX + "px";
@@ -2209,31 +2094,35 @@ mapContainer.addEventListener(
 );
 
 
-/* ============================================================
-   HEADER BUTTONS
-============================================================ */
+/* =========================================================
+   HEADER
+========================================================= */
 
 function showProfile() {
 
-    alert(
-        T[currentLanguage].comingSoon
-    );
+    const lang =
+        T[currentLanguage] || T.en;
 
+    alert(
+        lang.comingSoon
+    );
 }
 
 
 function showMarketplace() {
 
-    alert(
-        T[currentLanguage].comingSoon
-    );
+    const lang =
+        T[currentLanguage] || T.en;
 
+    alert(
+        lang.comingSoon
+    );
 }
 
 
-/* ============================================================
+/* =========================================================
    INITIALIZATION
-============================================================ */
+========================================================= */
 
 buildLanguages();
 
@@ -2242,6 +2131,8 @@ if (currentLanguage) {
 
     document.documentElement.lang =
         currentLanguage;
+
+    updateDirection();
 
     document.getElementById(
         "languageScreen"
@@ -2252,6 +2143,12 @@ if (currentLanguage) {
     ).style.display = "block";
 
     updateTexts();
+
+    /*
+       Теперь здесь НЕ будет Москвы.
+
+       Сначала страна.
+    */
 
     startWorldPix();
 
