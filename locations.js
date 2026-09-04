@@ -2059,3 +2059,495 @@ function getAllCities() {
 
   return result;
 }
+// =========================================================
+// WORLDPIX 0.7 — HINDI + POLISH LOCALIZATION
+// =========================================================
+
+const WORLDPIX_EXTRA_LOCALIZATION = {
+
+  // ---------------------------------------------------------
+  // COUNTRIES
+  // ---------------------------------------------------------
+
+  countries: {
+
+    russia: {
+      hi: "रूस",
+      pl: "Rosja"
+    },
+
+    united_states: {
+      hi: "संयुक्त राज्य अमेरिका",
+      pl: "Stany Zjednoczone"
+    },
+
+    china: {
+      hi: "चीन",
+      pl: "Chiny"
+    },
+
+    india: {
+      hi: "भारत",
+      pl: "Indie"
+    },
+
+    japan: {
+      hi: "जापान",
+      pl: "Japonia"
+    },
+
+    south_korea: {
+      hi: "दक्षिण कोरिया",
+      pl: "Korea Południowa"
+    },
+
+    indonesia: {
+      hi: "इंडोनेशिया",
+      pl: "Indonezja"
+    },
+
+    bangladesh: {
+      hi: "बांग्लादेश",
+      pl: "Bangladesz"
+    },
+
+    pakistan: {
+      hi: "पाकिस्तान",
+      pl: "Pakistan"
+    },
+
+    egypt: {
+      hi: "मिस्र",
+      pl: "Egipt"
+    },
+
+    brazil: {
+      hi: "ब्राज़ील",
+      pl: "Brazylia"
+    },
+
+    mexico: {
+      hi: "मेक्सिको",
+      pl: "Meksyk"
+    },
+
+    turkey: {
+      hi: "तुर्की",
+      pl: "Turcja"
+    },
+
+    germany: {
+      hi: "जर्मनी",
+      pl: "Niemcy"
+    },
+
+    france: {
+      hi: "फ़्रांस",
+      pl: "Francja"
+    },
+
+    united_kingdom: {
+      hi: "यूनाइटेड किंगडम",
+      pl: "Wielka Brytania"
+    },
+
+    italy: {
+      hi: "इटली",
+      pl: "Włochy"
+    },
+
+    spain: {
+      hi: "स्पेन",
+      pl: "Hiszpania"
+    },
+
+    argentina: {
+      hi: "अर्जेंटीना",
+      pl: "Argentyna"
+    },
+
+    philippines: {
+      hi: "फ़िलीपींस",
+      pl: "Filipiny"
+    },
+
+    thailand: {
+      hi: "थाईलैंड",
+      pl: "Tajlandia"
+    },
+
+    vietnam: {
+      hi: "वियतनाम",
+      pl: "Wietnam"
+    },
+
+    iran: {
+      hi: "ईरान",
+      pl: "Iran"
+    },
+
+    iraq: {
+      hi: "इराक",
+      pl: "Irak"
+    },
+
+    colombia: {
+      hi: "कोलंबिया",
+      pl: "Kolumbia"
+    },
+
+    south_africa: {
+      hi: "दक्षिण अफ्रीका",
+      pl: "Republika Południowej Afryki"
+    },
+
+    nigeria: {
+      hi: "नाइजीरिया",
+      pl: "Nigeria"
+    },
+
+    australia: {
+      hi: "ऑस्ट्रेलिया",
+      pl: "Australia"
+    }
+
+  },
+
+
+  // ---------------------------------------------------------
+  // CITIES
+  // ---------------------------------------------------------
+
+  cities: {
+
+    moscow: {
+      hi: "मॉस्को",
+      pl: "Moskwa"
+    },
+
+    saint_petersburg: {
+      hi: "सेंट पीटर्सबर्ग",
+      pl: "Petersburg"
+    },
+
+    novosibirsk: {
+      hi: "नोवोसिबिर्स्क",
+      pl: "Nowosybirsk"
+    },
+
+    new_york: {
+      hi: "न्यूयॉर्क",
+      pl: "Nowy Jork"
+    },
+
+    los_angeles: {
+      hi: "लॉस एंजिल्स",
+      pl: "Los Angeles"
+    },
+
+    chicago: {
+      hi: "शिकागो",
+      pl: "Chicago"
+    },
+
+    houston: {
+      hi: "ह्यूस्टन",
+      pl: "Houston"
+    },
+
+    miami: {
+      hi: "मियामी",
+      pl: "Miami"
+    },
+
+    beijing: {
+      hi: "बीजिंग",
+      pl: "Pekin"
+    },
+
+    shanghai: {
+      hi: "शंघाई",
+      pl: "Szanghaj"
+    },
+
+    guangzhou: {
+      hi: "ग्वांगझोउ",
+      pl: "Kanton"
+    },
+
+    shenzhen: {
+      hi: "शेनझेन",
+      pl: "Shenzhen"
+    },
+
+    tianjin: {
+      hi: "तियानजिन",
+      pl: "Tianjin"
+    },
+
+    new_delhi: {
+      hi: "नई दिल्ली",
+      pl: "Nowe Delhi"
+    },
+
+    mumbai: {
+      hi: "मुंबई",
+      pl: "Mumbaj"
+    },
+
+    kolkata: {
+      hi: "कोलकाता",
+      pl: "Kalkuta"
+    },
+
+    bengaluru: {
+      hi: "बेंगलुरु",
+      pl: "Bengaluru"
+    },
+
+    hyderabad: {
+      hi: "हैदराबाद",
+      pl: "Hajdarabad"
+    },
+
+    ahmedabad: {
+      hi: "अहमदाबाद",
+      pl: "Ahmedabad"
+    },
+
+    tokyo: {
+      hi: "टोक्यो",
+      pl: "Tokio"
+    },
+
+    osaka: {
+      hi: "ओसाका",
+      pl: "Osaka"
+    },
+
+    nagoya: {
+      hi: "नागोया",
+      pl: "Nagoja"
+    },
+
+    seoul: {
+      hi: "सियोल",
+      pl: "Seul"
+    },
+
+    busan: {
+      hi: "बुसान",
+      pl: "Pusan"
+    },
+
+    jakarta: {
+      hi: "जकार्ता",
+      pl: "Dżakarta"
+    },
+
+    dhaka: {
+      hi: "ढाका",
+      pl: "Dhaka"
+    },
+
+    karachi: {
+      hi: "कराची",
+      pl: "Karaczi"
+    },
+
+    lahore: {
+      hi: "लाहौर",
+      pl: "Lahaur"
+    },
+
+    cairo: {
+      hi: "काहिरा",
+      pl: "Kair"
+    },
+
+    sao_paulo: {
+      hi: "साओ पाउलो",
+      pl: "São Paulo"
+    },
+
+    rio_de_janeiro: {
+      hi: "रियो डी जनेरियो",
+      pl: "Rio de Janeiro"
+    },
+
+    mexico_city: {
+      hi: "मेक्सिको सिटी",
+      pl: "Meksyk"
+    },
+
+    istanbul: {
+      hi: "इस्तांबुल",
+      pl: "Stambuł"
+    },
+
+    ankara: {
+      hi: "अंकारा",
+      pl: "Ankara"
+    },
+
+    berlin: {
+      hi: "बर्लिन",
+      pl: "Berlin"
+    },
+
+    hamburg: {
+      hi: "हैम्बर्ग",
+      pl: "Hamburg"
+    },
+
+    paris: {
+      hi: "पेरिस",
+      pl: "Paryż"
+    },
+
+    marseille: {
+      hi: "मार्सेय",
+      pl: "Marsylia"
+    },
+
+    london: {
+      hi: "लंदन",
+      pl: "Londyn"
+    },
+
+    manchester: {
+      hi: "मैनचेस्टर",
+      pl: "Manchester"
+    },
+
+    rome: {
+      hi: "रोम",
+      pl: "Rzym"
+    },
+
+    milan: {
+      hi: "मिलान",
+      pl: "Mediolan"
+    },
+
+    madrid: {
+      hi: "मैड्रिड",
+      pl: "Madryt"
+    },
+
+    barcelona: {
+      hi: "बार्सिलोना",
+      pl: "Barcelona"
+    },
+
+    buenos_aires: {
+      hi: "ब्यूनस आयर्स",
+      pl: "Buenos Aires"
+    },
+
+    manila: {
+      hi: "मनीला",
+      pl: "Manila"
+    },
+
+    bangkok: {
+      hi: "बैंकॉक",
+      pl: "Bangkok"
+    },
+
+    ho_chi_minh_city: {
+      hi: "हो ची मिन्ह सिटी",
+      pl: "Ho Chi Minh"
+    },
+
+    hanoi: {
+      hi: "हनोई",
+      pl: "Hanoi"
+    },
+
+    tehran: {
+      hi: "तेहरान",
+      pl: "Teheran"
+    },
+
+    baghdad: {
+      hi: "बगदाद",
+      pl: "Bagdad"
+    },
+
+    bogota: {
+      hi: "बोगोटा",
+      pl: "Bogota"
+    },
+
+    medellin: {
+      hi: "मेडेलिन",
+      pl: "Medellín"
+    },
+
+    johannesburg: {
+      hi: "जोहान्सबर्ग",
+      pl: "Johannesburg"
+    },
+
+    cape_town: {
+      hi: "केप टाउन",
+      pl: "Kapsztad"
+    },
+
+    lagos: {
+      hi: "लागोस",
+      pl: "Lagos"
+    },
+
+    abuja: {
+      hi: "अबुजा",
+      pl: "Abudża"
+    },
+
+    sydney: {
+      hi: "सिडनी",
+      pl: "Sydney"
+    },
+
+    melbourne: {
+      hi: "मेलबर्न",
+      pl: "Melbourne"
+    }
+
+  }
+
+};
+
+
+// =========================================================
+// APPLY EXTRA LOCALIZATION
+// =========================================================
+
+WORLDPIX_LOCATIONS.forEach(country => {
+
+  // Add Hindi + Polish to country names
+  if (WORLDPIX_EXTRA_LOCALIZATION.countries[country.id]) {
+
+    Object.assign(
+      country.names,
+      WORLDPIX_EXTRA_LOCALIZATION.countries[country.id]
+    );
+
+  }
+
+  // Add Hindi + Polish to city names
+  country.cities.forEach(city => {
+
+    if (WORLDPIX_EXTRA_LOCALIZATION.cities[city.id]) {
+
+      Object.assign(
+        city.names,
+        WORLDPIX_EXTRA_LOCALIZATION.cities[city.id]
+      );
+
+    }
+
+  });
+
+});
