@@ -2551,3 +2551,4 @@ WORLDPIX_LOCATIONS.forEach(country => {
   });
 
 });
+window.WORLDPIX_LOCATIONS = WORLDPIX_LOCATIONS;
